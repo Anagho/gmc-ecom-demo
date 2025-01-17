@@ -8,7 +8,16 @@ import { connectToDatabase } from "./config/mongodbConnection.js";
 const PORT = 3000;
 const app = express();
 
-app.use(cors());
+app.use(
+  cors({
+    origins: [
+      "https://ecomdemo-eight.vercel.app/",
+      "https://ecomdemo-eight.vercel.app",
+      "http://localhost:5173/",
+      "http://localhost:5173"
+    ],
+  })
+);
 app.use(express.json())
 
 app.get("/", (req, res) => {
