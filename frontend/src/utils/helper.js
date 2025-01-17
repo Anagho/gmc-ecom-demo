@@ -5,4 +5,4 @@ export function formatCurrency(amount) {
   }).format(amount);
 }
 
-export const serverUrl = "http://localhost:3000/api/v1"
+export const serverUrl = process.env.NODE_ENV === "production" ? "https://gmc-ecom-demo.onrender.com" : "http://localhost:3000/api/v1";
