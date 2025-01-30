@@ -1,12 +1,12 @@
 import React from "react";
 import AllCustomersOrders from "../../components/admin/orders/AllCustomersOrders";
-import { Link } from "react-router";
+import AllStoreProducts from "../../components/admin/products/AllStoreProducts";
 
 const Admin = () => {
   return (
     <section>
-      <Link to={"/admin/add-product"}>Create a Product</Link>
       <AllCustomersOrders />
+      <AllStoreProducts />
     </section>
   );
 };

@@ -1,6 +1,5 @@
 import React from "react";
 import ProductCard from "./ProductCard";
-import { productData } from "../../constants/products";
 import { useSelector } from "react-redux";
 
 function ProductList() {

@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 const productSchema = new mongoose.Schema(
   {
     product_id: {
-      type: Number,
+      type: String,
     },
     product_name: {
       type: String,
@@ -27,7 +27,7 @@ const productSchema = new mongoose.Schema(
     },
     product_category: {
       type: String,
-      enum: ["fruits", "vegetables", "diary", "grains"],
+      enum: ["fruits", "vegetables", "dairy", "grains"],
     },
     product_in_stock: {
       type: Boolean,

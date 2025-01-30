@@ -22,17 +22,14 @@ const AllCustomersOrders = () => {
     getCustomersOrders();
   }, []);
 
-  console.log(customersOrders);
+  // console.log(customersOrders);
 
   return (
     <section className="max-w-[1100px] mx-auto py-16 px-4">
-      <h2 className="text-2xl my-4 leading-6 text-gray-700 text-center">
+      <h2 className="text-2xl my-4 leading-6 text-gray-700 text-center font-bold">
         All Orders
       </h2>
       <div>
-        {/* Admin Sidebar */}
-        <div></div>
-
         {/* Dashboard data */}
         <div className="overflow-x-auto">
           <table className="table-auto w-full border border-gray-200 rounded-lg">

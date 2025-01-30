@@ -1,32 +1,36 @@
 import { SearchOutlined } from "@ant-design/icons";
-import { productData } from "../../constants/products";
-import { useDispatch } from "react-redux";
-import { updateProducts } from "../../features/product/productSlice";
+// import { productData } from "../../constants/products";
+import { useDispatch, useSelector } from "react-redux";
+import { setProducts } from "../../features/product/productSlice";
 
 const Filter = ({ productOptions, searchValue, selectedFilter }) => {
   const dispatch = useDispatch();
 
+  // Get the products from the state
+  const { products } = useSelector((state) => state.products);
+  console.log(products);
+
   // product filter function
   function handleProductFilter(category) {
     if (category === "all") {
-      dispatch(updateProducts(productData));
+      dispatch(setProducts(products));
       return;
     }
 
-    const filteredProducts = productData.filter(
+    const filteredProducts = products.filter(
       (item) => item.product_category === category
     );
 
-    dispatch(updateProducts(filteredProducts));
+    dispatch(setProducts(filteredProducts));
   }
 
   function handleProductSearch(productName) {
-    const searchedProducts = productData.filter((item) => {
+    const searchedProducts = products.filter((item) => {
       return item.product_name
         .toLowerCase()
         .includes(productName.toLowerCase());
     });
-    dispatch(updateProducts(searchedProducts));
+    dispatch(setProducts(searchedProducts));
   }
 
   return (

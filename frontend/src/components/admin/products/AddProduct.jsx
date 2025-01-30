@@ -2,9 +2,10 @@ import { Input, Button, Select, InputNumber } from "antd";
 import { useState } from "react";
 import validator from "validator";
 import axios from "axios";
-import { serverUrl } from "../../utils/helper";
-import { updateProducts } from "../../features/product/productSlice";
+import { serverUrl } from "../../../utils/helper";
+import { addProduct } from "../../../features/product/productSlice";
 import { useDispatch } from "react-redux";
+import BackButton from "../../ui/buttons/BackButton";
 
 const AddProduct = () => {
   const [productFormData, setProductFormData] = useState({
@@ -63,7 +64,7 @@ const AddProduct = () => {
 
       if (response.data.status === "success") {
         console.log(response);
-        dispatch(updateProducts(response.data.product));
+        dispatch(addProduct(response.data.product));
       }
     } catch (error) {
       console.log(error);
@@ -75,7 +76,8 @@ const AddProduct = () => {
   console.log(productFormData);
 
   return (
-    <div className="grid h-screen place-items-center p-2">
+    <div className="flex items-center justify-center flex-col w-full min-h-screen">
+      <BackButton />
       <form className="flex flex-col gap-4 w-full max-w-[500px] border p-4 rounded-lg">
         <h3 className="text-2xl text-blue-800 text-center">Add a Product</h3>
 

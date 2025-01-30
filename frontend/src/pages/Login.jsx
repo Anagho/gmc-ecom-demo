@@ -45,6 +45,7 @@ const Login = () => {
       );
 
       if (response.data.status === "success") {
+        localStorage.setItem('user', JSON.stringify(response.data.user))
         dispatch(updateUser(response.data.user));
       }
 

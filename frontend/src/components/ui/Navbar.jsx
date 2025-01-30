@@ -2,21 +2,17 @@ import { ShoppingCart } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useNavigate } from "react-router";
 import { updateUser } from "../../features/user/userSlice";
-import { useState } from "react";
 import Filter from "./Filter";
-import { productData } from "../../constants/products";
-import { updateProducts } from "../../features/product/productSlice";
 
 function Navbar() {
   const { cartItems } = useSelector((state) => state.cart);
   const { user } = useSelector((state) => state.user);
 
+  // const [searchValue, setSearchValue] = useState('');
+  // const [selectedFilter, setSelectedFilter] = useState('all');
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
-  // State for filter and search
-  const [searchTitle, setSearchTitle] = useState("");
-  const [selectedFilter, setSelectedFilter] = useState("all");
 
   // Filter options
   const productOptions = [
@@ -28,6 +24,7 @@ function Navbar() {
   ];
 
   function handleUserLogout() {
+    localStorage.removeItem("user");
     dispatch(updateUser(null));
     navigate("/");
   }

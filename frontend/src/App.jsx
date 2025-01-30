@@ -13,7 +13,8 @@ import Register from "./pages/Register";
 import UserProfile from "./pages/UserProfile";
 import ProtectedLayout from "./Layout/ProtectedLayout";
 import ProtectedAdminLayout from "./Layout/ProtectedAdminLayout";
-import AddProduct from "./pages/protected/AddProduct";
+import AddProductPage from "./pages/protected/AddProductPage";
+import NotFound from "./pages/NotFound";
 
 function App() {
   return (
@@ -34,7 +35,7 @@ function App() {
           <Route path="admin" element={<ProtectedAdminLayout />}>
             <Route index element={<Admin />} />
             <Route path=":order_id" element={<OrderDetails />} />
-            <Route path="add-product" element={<AddProduct />} />
+            <Route path="add-product" element={<AddProductPage />} />
           </Route>
 
           <Route path="profile" element={<UserProfile />} />
@@ -43,6 +44,9 @@ function App() {
 
         <Route path="login" element={<Login />} />
         <Route path="register" element={<Register />} />
+
+        {/* 404 Page */}
+        <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>
   );
