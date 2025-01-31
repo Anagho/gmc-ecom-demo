@@ -15,6 +15,8 @@ import ProtectedLayout from "./Layout/ProtectedLayout";
 import ProtectedAdminLayout from "./Layout/ProtectedAdminLayout";
 import AddProductPage from "./pages/protected/AddProductPage";
 import NotFound from "./pages/NotFound";
+import ProductsPage from "./pages/protected/ProductsPage";
+import OrdersPage from "./pages/protected/OrdersPage";
 
 function App() {
   return (
@@ -36,6 +38,8 @@ function App() {
             <Route index element={<Admin />} />
             <Route path=":order_id" element={<OrderDetails />} />
             <Route path="add-product" element={<AddProductPage />} />
+            <Route path="products" element={<ProductsPage />} />
+            <Route path="orders" element={<OrdersPage />} />
           </Route>
 
           <Route path="profile" element={<UserProfile />} />

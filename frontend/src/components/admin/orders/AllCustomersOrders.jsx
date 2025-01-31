@@ -6,15 +6,18 @@ import { Link } from "react-router";
 
 const AllCustomersOrders = () => {
   const [customersOrders, setCustomersOrders] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   async function getCustomersOrders() {
+    setLoading(true)
     try {
       const response = await axios.get(`${serverUrl}/order/all-orders`);
       setCustomersOrders(response.data.data);
       //   console.log(response);
     } catch (error) {
       console.log(error);
+    } finally {
+      setLoading(false)
     }
   }
 
@@ -24,6 +27,17 @@ const AllCustomersOrders = () => {
 
   // console.log(customersOrders);
 
+   if (loading) {
+     return (
+       <div className="flex items-center justify-center h-screen bg-gray-100">
+         <h1 className="text-4xl text-gray-600 font-semibold animate-pulse">
+           Loading Customer Orders...
+         </h1>
+       </div>
+     );
+   }
+
+
   return (
     <section className="max-w-[1100px] mx-auto py-16 px-4">
       <h2 className="text-2xl my-4 leading-6 text-gray-700 text-center font-bold">
@@ -32,7 +46,7 @@ const AllCustomersOrders = () => {
       <div>
         {/* Dashboard data */}
         <div className="overflow-x-auto">
-          <table className="table-auto w-full border border-gray-200 rounded-lg">
+          <table className="table-auto w-full border border-gray-900 rounded-lg">
             <thead className="bg-gray-100 text-gray-800 text-left">
               <tr>
                 <th className="py-2 px-4 border">Date</th>

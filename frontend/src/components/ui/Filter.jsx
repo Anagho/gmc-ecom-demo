@@ -2,6 +2,8 @@ import { SearchOutlined } from "@ant-design/icons";
 // import { productData } from "../../constants/products";
 import { useDispatch, useSelector } from "react-redux";
 import { setProducts } from "../../features/product/productSlice";
+import { serverUrl } from "../../utils/helper";
+import axios from "axios";
 
 const Filter = ({ productOptions, searchValue, selectedFilter }) => {
   const dispatch = useDispatch();
@@ -10,18 +12,34 @@ const Filter = ({ productOptions, searchValue, selectedFilter }) => {
   const { products } = useSelector((state) => state.products);
   console.log(products);
 
-  // product filter function
-  function handleProductFilter(category) {
-    if (category === "all") {
-      dispatch(setProducts(products));
-      return;
+  async function getProducts(category) {
+    try {
+      const response = await axios.get(
+        `${serverUrl}/product/all-products?category=${category}`
+      );
+      // console.log(response);
+      dispatch(setProducts(response.data.products));
+    } catch (error) {
+      console.log(error);
     }
 
-    const filteredProducts = products.filter(
-      (item) => item.product_category === category
-    );
 
-    dispatch(setProducts(filteredProducts));
+  }
+
+  // product filter function
+  async function handleProductFilter(category) {
+    await getProducts(category);
+
+    // if (category === "all") {
+    //   dispatch(setProducts(products));
+    //   return;
+    // }
+
+    // const filteredProducts = products.filter(
+    //   (item) => item.product_category === category
+    // );
+
+    
   }
 
   function handleProductSearch(productName) {

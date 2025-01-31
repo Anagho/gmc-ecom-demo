@@ -24,9 +24,9 @@ export const productSlice = createSlice({
     },
 
     // *** Action to edit & update products
-    editProduct: (state, action) => {
+    updateProduct: (state, action) => {
       const updatedProducts = state.products.map((item) => {
-        if (item.product_id === action.payload.product_id) {
+        if (item.product_id === action.payload.productId) {
           return { ...item, ...action.payload };
         }
         return item;
@@ -36,7 +36,7 @@ export const productSlice = createSlice({
   },
 });
 
-export const { setProducts, addProduct, editProduct, deleteProduct } =
+export const { setProducts, addProduct, updateProduct, deleteProduct } =
   productSlice.actions;
 
 export default productSlice.reducer;

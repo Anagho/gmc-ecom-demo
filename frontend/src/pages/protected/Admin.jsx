@@ -1,13 +1,11 @@
 import React from "react";
-import AllCustomersOrders from "../../components/admin/orders/AllCustomersOrders";
-import AllStoreProducts from "../../components/admin/products/AllStoreProducts";
+import Dashboard from "../../components/admin/Dashboard";
 
 const Admin = () => {
   return (
-    <section>
-      <AllCustomersOrders />
-      <AllStoreProducts />
-    </section>
+    <>
+      <Dashboard />
+    </>
   );
 };
 

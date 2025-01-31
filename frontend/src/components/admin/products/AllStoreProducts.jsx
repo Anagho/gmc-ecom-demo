@@ -1,15 +1,33 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { formatCurrency, serverUrl } from "../../../utils/helper";
-import { Button } from "antd";
+import { Button, Modal } from "antd";
 import { Link } from "react-router";
 import { DeleteOutlined } from "@ant-design/icons";
 import EditProduct from "./EditProduct";
 
-
 const AllStoreProducts = () => {
   const [storeProducts, setStoreProducts] = useState([]);
   const [loading, setLoading] = useState(true);
+
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [selectedProductId, setSelectedProductId] = useState(null);
+
+
+  //    Delete product function
+  const handleDelete =  async () => {
+    console.log(selectedProductId)
+    try {
+        const response = await axios.delete(`${serverUrl}/product/${selectedProductId}`)
+        console.log(response)
+        getStoreProducts()
+
+        setIsDeleteModalOpen(false)
+
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   async function getStoreProducts() {
     setLoading(true);
@@ -41,10 +59,12 @@ const AllStoreProducts = () => {
   }
 
   return (
-    <section className="max-w-[1100px] mx-auto py-16 px-4">
+    <section className="max-w-[1100px] mx-auto py-2 px-4">
       <div className="flex justify-end">
         <Link to={"/admin/add-product"}>
-          <Button type="primary" size="large">Create a Product</Button>
+          <Button type="primary" size="large">
+            Create a Product
+          </Button>
         </Link>
       </div>
       <h2 className="text-2xl my-4 leading-6 text-gray-700 text-center font-bold">
@@ -53,8 +73,8 @@ const AllStoreProducts = () => {
       <div>
         {/* Dashboard data */}
         <div className="overflow-x-auto">
-          <table className="table-auto w-full border border-gray-200 rounded-lg">
-            <thead className="bg-gray-100 text-gray-800 text-left">
+          <table className="table-auto w-full border border-gray-900 rounded-lg">
+            <thead className="bg-gray-300 text-gray-800 text-left">
               <tr>
                 <th className="py-2 px-4 border">S/N</th>
                 <th className="py-2 px-4 border">Product</th>
@@ -72,7 +92,7 @@ const AllStoreProducts = () => {
               {storeProducts.map((item, index) => {
                 return (
                   <tr
-                    className="text-gray-500 hover:bg-gray-50 hover:text-black cursor-pointer"
+                    className="text-gray-500 border-gray-900 hover:bg-gray-50 hover:text-black cursor-pointer"
                     key={item._id}
                   >
                     <td className="py-2 px-4 border">{index + 1}</td>
@@ -107,17 +127,20 @@ const AllStoreProducts = () => {
                           productDescription={item.product_description}
                           productPrice={item.product_price}
                           productQuantity={item.product_quantity}
-                          stockStatus={item.product_in_stock ? "In Stock" : "Out of Stock"}
+                          stockStatus={
+                            item.product_in_stock ? "In Stock" : "Out of Stock"
+                          }
                           productImage={item.product_image}
                           productCategory={item.product_category}
                         />
                         <Button
-                          icon={
-                            <DeleteOutlined
-                              className="text-red-500"
-                              title="Delete Product"
-                            />
-                          }
+                          icon={<DeleteOutlined className="text-red-500" />}
+                          onClick={() => {
+                            setIsDeleteModalOpen(true);
+                            setSelectedProductId(item._id);
+                          }}
+                          title="Delete Product"
+                          
                         />
                       </span>
                     </td>
@@ -128,6 +151,17 @@ const AllStoreProducts = () => {
           </table>
         </div>
       </div>
+
+      <Modal
+        title="Delete Product"
+        open={isDeleteModalOpen}
+        onOk={handleDelete}
+        onCancel={() => setIsDeleteModalOpen(false)}
+      >
+        <p className="text-red-500 text-xl">
+          Are you sure you want to delete this product?
+        </p>
+      </Modal>
     </section>
   );
 };
