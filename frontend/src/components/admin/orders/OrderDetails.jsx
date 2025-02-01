@@ -39,7 +39,7 @@ const OrderDetails = () => {
   }
 
   return (
-    <div className="bg-white shadow-md rounded-lg p-8">
+    <div className="bg-white shadow-md rounded-lg p-2">
       <BackButton />
       <p className="text-lg font-semibold text-gray-700 mb-4">
         Order Date:{" "}
@@ -61,45 +61,48 @@ const OrderDetails = () => {
         </span>
       </h3>
 
-      {/* Transaction Details */}
-      <div className="mb-6 bg-green-200 rounded-md p-2">
-        <h2 className="text-xl font-bold text-gray-800 mb-2">
-          Transaction Details
-        </h2>
-        <p>
-          <strong>Paystack Transaction ID:</strong>{" "}
-          {orderInformation.reference.trxref}
-        </p>
-        <p>
-          <strong>Transaction Status:</strong>{" "}
-          {orderInformation.reference.status}
-        </p>
-        <p>
-          <strong>Payment:</strong> {orderInformation.reference.message}
-        </p>
-      </div>
+      <section className="flex flex-col md:flex-row gap-x-10">
+        {/* Transaction Details */}
+        <div className="mb-6 bg-green-200 rounded-md p-6 shadow-lg">
+          <h2 className="text-xl font-bold text-gray-800 mb-2">
+            Transaction Details
+          </h2>
+          <p>
+            <strong>Paystack Transaction ID:</strong>{" "}
+            {orderInformation.reference.trxref}
+          </p>
+          <p>
+            <strong>Transaction Status:</strong>{" "}
+            {orderInformation.reference.status}
+          </p>
+          <p>
+            <strong>Payment:</strong> {orderInformation.reference.message}
+          </p>
+        </div>
 
-      {/* Customer Information */}
-      <div className="mb-6 bg-blue-100 rounded-md p-2">
-        <h2 className="text-xl font-bold text-gray-800 mb-2">
-          Customer Information
-        </h2>
-        <p>
-          <strong>Name:</strong>{" "}
-          {orderInformation.customerDeliveryInfo.customerName}
-        </p>
-        <p>
-          <strong>Email:</strong> {orderInformation.customerDeliveryInfo.email}
-        </p>
-        <p>
-          <strong>Phone Number:</strong>{" "}
-          {orderInformation.customerDeliveryInfo.phoneNumber}
-        </p>
-        <p>
-          <strong>Delivery Address:</strong>{" "}
-          {orderInformation.customerDeliveryInfo.deliveryAddress}
-        </p>
-      </div>
+        {/* Customer Information */}
+        <div className="mb-6 bg-blue-100 rounded-md p-6 shadow-lg">
+          <h2 className="text-xl font-bold text-gray-800 mb-2">
+            Customer Information
+          </h2>
+          <p>
+            <strong>Name:</strong>{" "}
+            {orderInformation.customerDeliveryInfo.customerName}
+          </p>
+          <p>
+            <strong>Email:</strong>{" "}
+            {orderInformation.customerDeliveryInfo.email}
+          </p>
+          <p>
+            <strong>Phone Number:</strong>{" "}
+            {orderInformation.customerDeliveryInfo.phoneNumber}
+          </p>
+          <p>
+            <strong>Delivery Address:</strong>{" "}
+            {orderInformation.customerDeliveryInfo.deliveryAddress}
+          </p>
+        </div>
+      </section>
 
       {/* Cart Items Table */}
       <div className="overflow-x-auto">

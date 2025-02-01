@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router";
-import { productData } from "../../constants/products";
 import { Button, message } from "antd";
 import { formatCurrency } from "../../utils/helper";
 import { addItemToCart } from "../../features/cart/CartSlice";
@@ -12,12 +11,16 @@ const ProductInfo = () => {
   const [singleProduct, setSingleProduct] = useState(null);
   const dispatch = useDispatch();
   const { cartItems } = useSelector((state) => state.cart);
+  const { products } = useSelector((state) => state.products);
   const [messageApi, contextHolder] = message.useMessage();
 
+  // console.log(products)
+
+  
   useEffect(() => {
-    const product = productData.find(
-      (item) => item.product_id === params.product_id
-    );
+    const product = products.find(
+        (item) => item._id === params.product_id
+      );
 
     setSingleProduct(product);
   }, []);

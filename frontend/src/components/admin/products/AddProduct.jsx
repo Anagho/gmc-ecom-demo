@@ -1,4 +1,4 @@
-import { Input, Button, Select, InputNumber } from "antd";
+import { Input, Button, Select, InputNumber, message } from "antd";
 import { useState } from "react";
 import validator from "validator";
 import axios from "axios";
@@ -8,13 +8,17 @@ import { useDispatch } from "react-redux";
 import BackButton from "../../ui/buttons/BackButton";
 
 const AddProduct = () => {
+
+  
   const [productFormData, setProductFormData] = useState({
     product_name: "",
-    product_price: 0,
+    product_price: "",
     product_description: "",
-    product_category: "",
+    product_category: null,
     product_image: "",
   });
+
+  const [messageApi, contextHolder] = message.useMessage();
 
   const [isLoading, setIsLoading] = useState(false);
   const dispatch = useDispatch();
@@ -26,18 +30,18 @@ const AddProduct = () => {
         ignore_whitespace: true,
       })
     ) {
-      return alert("Please provide a product name");
+      return messageApi.error("Please provide a product name");
     }
     if (
       validator.isEmpty(productFormData.product_description, {
         ignore_whitespace: true,
       })
     ) {
-      return alert("Please provide a description name");
+      return messageApi.error("Please provide a description name");
     }
 
     if (productFormData.product_price < 1) {
-      return alert("Please provide a product price");
+      return messageApi.error("Please provide a product price");
     }
 
     if (
@@ -45,11 +49,11 @@ const AddProduct = () => {
         ignore_whitespace: true,
       })
     ) {
-      return alert("Please provide a product category");
+      return messageApi.error("Please provide a product category");
     }
 
     if (!validator.isURL(productFormData.product_image)) {
-      return alert("Please provide a product image");
+      return messageApi.error("Please provide a product image");
     }
 
     console.log("Here");
@@ -65,9 +69,23 @@ const AddProduct = () => {
       if (response.data.status === "success") {
         console.log(response);
         dispatch(addProduct(response.data.product));
+        messageApi.success("product added successfully");
+
+        // Clear input fields
+        setProductFormData({
+          product_name: "",
+          product_price: "",
+          product_description: "",
+          product_category: null,
+          product_image: "",
+        });
       }
     } catch (error) {
-      console.log(error);
+      if (error.response && error.response.data.message) {
+        messageApi.error(error.response.data.message);
+      } else {
+        messageApi.error("Failed to add product. Try again later.");
+      }
     } finally {
       setIsLoading(false);
     }
@@ -77,6 +95,7 @@ const AddProduct = () => {
 
   return (
     <section>
+      {contextHolder}
       <BackButton />
       <div className="flex justify-center">
         <form className="flex flex-col gap-4 bg-white w-full max-w-[500px] border p-4 rounded-lg shadow-md">
@@ -91,6 +110,7 @@ const AddProduct = () => {
             }
             placeholder="Enter product name"
             size="large"
+            value={productFormData.product_name}
           />
           <Input
             onChange={(e) =>
@@ -101,6 +121,7 @@ const AddProduct = () => {
             }
             placeholder="Enter product description"
             size="large"
+            value={productFormData.product_description}
           />
           <InputNumber
             onChange={(value) =>
@@ -114,6 +135,7 @@ const AddProduct = () => {
             }}
             placeholder="Enter a product price"
             size="large"
+            value={productFormData.product_price}
           />
           <Select
             showSearch
@@ -145,6 +167,7 @@ const AddProduct = () => {
                 product_category: value,
               })
             }
+            value={productFormData.product_category}
           />
           <Input
             onChange={(e) =>
@@ -155,6 +178,7 @@ const AddProduct = () => {
             }
             placeholder="Enter a product image url"
             size="large"
+            value={productFormData.product_image}
           />
 
           <Button onClick={handleAddProduct} loading={isLoading} type="primary">

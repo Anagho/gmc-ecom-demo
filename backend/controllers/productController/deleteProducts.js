@@ -6,7 +6,7 @@ const deleteProduct = async (req, res) => {
       _id: req.params.id,
     });
     if (product) {
-      res.json({ message: "product deleted" });
+      res.json({ message: "product deleted successfully" });
       console.log("Product deleted");
     } else {
       res.status(404).json({ message: "Product not found" });

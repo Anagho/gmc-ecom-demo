@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { formatCurrency, serverUrl } from "../../../utils/helper";
-import { Button, Modal } from "antd";
+import { Button, Modal, message } from "antd";
 import { Link } from "react-router";
 import { DeleteOutlined } from "@ant-design/icons";
 import EditProduct from "./EditProduct";
@@ -13,6 +13,8 @@ const AllStoreProducts = () => {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [selectedProductId, setSelectedProductId] = useState(null);
 
+  const [messageApi, contextHolder] = message.useMessage();
+
   //    Delete product function
   const handleDelete = async () => {
     console.log(selectedProductId);
@@ -20,13 +22,16 @@ const AllStoreProducts = () => {
       const response = await axios.delete(
         `${serverUrl}/product/${selectedProductId}`
       );
-      console.log(response);
-      getStoreProducts();
 
+      messageApi.success(response.data.message)
+      console.log(response.data.message);
+      
       setIsDeleteModalOpen(false);
     } catch (error) {
       console.log(error);
+      messageApi.error(error.data.message)
     }
+    getStoreProducts();
   };
 
   async function getStoreProducts() {
@@ -60,6 +65,7 @@ const AllStoreProducts = () => {
 
   return (
     <section className="overflow-y-auto">
+      {contextHolder}
       <div className="flex justify-between items-center my-6 ">
         <h2 className="text-2xl text-gray-700 font-medium">All Products</h2>
         <Link to={"/admin/add-product"}>

@@ -51,6 +51,20 @@ async function addProduct(req, res) {
 
   // Add new product here
   try {
+    // Check if product already exists (case insensitive)
+    const existingProduct = await ProductModel.findOne({
+      product_name: { $regex: new RegExp("^" + product_name + "$", "i") },
+    });
+
+    if (existingProduct) {
+      return res
+        .status(400)
+        .json({
+          status: "error",
+          message: `The product: ${product_name}, already exists in the store`,
+        });
+    }
+
     const product = new ProductModel({
       product_id: nanoid(10),
       product_name: product_name,
