@@ -39,7 +39,7 @@ const OrderDetails = () => {
   }
 
   return (
-    <div className="max-w-4xl mx-auto bg-white/100 shadow-md rounded-lg p-8 mt-10">
+    <div className="bg-white shadow-md rounded-lg p-8">
       <BackButton />
       <p className="text-lg font-semibold text-gray-700 mb-4">
         Order Date:{" "}

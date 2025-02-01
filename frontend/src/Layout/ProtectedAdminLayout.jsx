@@ -20,7 +20,7 @@ const ProtectedAdminLayout = () => {
         <AdminNavbar />
 
         {/* Page Content */}
-        <div className="p-6 bg-gray-100 flex-1 overflow-y-auto">
+        <div className="p-6 bg-white flex-1 overflow-y-auto">
           <Outlet />
         </div>
       </section>
