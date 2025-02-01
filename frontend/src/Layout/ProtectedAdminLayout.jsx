@@ -12,19 +12,19 @@ const ProtectedAdminLayout = () => {
   }
 
   return (
-    <div className="flex h-screen">
+    <main className="flex h-screen">
       <AdminSidebar />
 
-      <div className="flex-1 flex flex-col">
+      <section className="flex-1 flex flex-col overflow-hidden">
         {/* Top Navbar */}
         <AdminNavbar />
 
         {/* Page Content */}
-        <main className="p-6 bg-gray-100 flex-1 overflow-auto">
+        <div className="p-6 bg-gray-100 flex-1 overflow-y-auto">
           <Outlet />
-        </main>
-      </div>
-    </div>
+        </div>
+      </section>
+    </main>
   );
 };
 

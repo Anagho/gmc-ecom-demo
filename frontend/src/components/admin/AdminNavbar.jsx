@@ -28,13 +28,11 @@ const AdminNavbar = () => {
   });
 
   return (
-    <nav className="bg-white shadow-md p-4 flex justify-between items-center">
-      <h1 className="font-semibold text-2xl">
-        Welcome <span className="text-green-700 text-3xl">{user?.name}</span>
-      </h1>
-      <div className="flex items-center gap-6">
+    <nav className="bg-white shadow-md p-2 flex justify-between items-center">
+      <h1 className="font-semibold text-xl text-green-700">Admin Dashboard</h1>
+      <div className="flex items-center gap-6 md:gap-4 sm:gap-2 whitespace-nowrap">
         {/* Date & Time */}
-        <div className="flex flex-col text-center text-sm">
+        <div className="hidden md:flex flex-col text-center text-sm">
           <div className="flex items-center gap-2">
             <FaCalendarAlt className="text-gray-500" />
             <p className="text-gray-600">{formattedDate}</p>

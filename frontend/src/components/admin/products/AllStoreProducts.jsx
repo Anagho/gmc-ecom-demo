@@ -13,17 +13,17 @@ const AllStoreProducts = () => {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [selectedProductId, setSelectedProductId] = useState(null);
 
-
   //    Delete product function
-  const handleDelete =  async () => {
-    console.log(selectedProductId)
+  const handleDelete = async () => {
+    console.log(selectedProductId);
     try {
-        const response = await axios.delete(`${serverUrl}/product/${selectedProductId}`)
-        console.log(response)
-        getStoreProducts()
+      const response = await axios.delete(
+        `${serverUrl}/product/${selectedProductId}`
+      );
+      console.log(response);
+      getStoreProducts();
 
-        setIsDeleteModalOpen(false)
-
+      setIsDeleteModalOpen(false);
     } catch (error) {
       console.log(error);
     }
@@ -59,97 +59,92 @@ const AllStoreProducts = () => {
   }
 
   return (
-    <section className="max-w-[1100px] mx-auto py-2 px-4">
-      <div className="flex justify-end">
+    <section className="overflow-y-auto">
+      <div className="flex justify-between items-center my-6 ">
+        <h2 className="text-2xl text-gray-700 font-medium">All Products</h2>
         <Link to={"/admin/add-product"}>
           <Button type="primary" size="large">
             Create a Product
           </Button>
         </Link>
       </div>
-      <h2 className="text-2xl my-4 leading-6 text-gray-700 text-center font-bold">
-        All Products
-      </h2>
-      <div>
-        {/* Dashboard data */}
-        <div className="overflow-x-auto">
-          <table className="table-auto w-full border border-gray-900 rounded-lg">
-            <thead className="bg-gray-300 text-gray-800 text-left">
-              <tr>
-                <th className="py-2 px-4 border">S/N</th>
-                <th className="py-2 px-4 border">Product</th>
-                <th className="py-2 px-4 border">Name</th>
-                <th className="py-2 px-4 border">Price</th>
-                <th className="py-2 px-4 border">Description</th>
-                <th className="py-2 px-4 border">Category</th>
-                <th className="py-2 px-4 border">Stock Status</th>
-                <th className="py-2 px-4 border">Quantity Available</th>
-                <th className="py-2 px-4 border">Actions</th>
-              </tr>
-            </thead>
 
-            <tbody>
-              {storeProducts.map((item, index) => {
-                return (
-                  <tr
-                    className="text-gray-500 border-gray-900 hover:bg-gray-50 hover:text-black cursor-pointer"
-                    key={item._id}
-                  >
-                    <td className="py-2 px-4 border">{index + 1}</td>
-                    <td className="py-2 px-4 border">
-                      <img
-                        src={item.product_image}
-                        alt={item.product_name}
-                        className="w-16 h-16 object-cover"
+      <div className="overflow-auto bg-white">
+        <table className="table-auto w-full border rounded-lg">
+          <thead className="bg-gray-300 text-gray-800 text-center">
+            <tr>
+              <th className="py-2 px-4 border">S/N</th>
+              <th className="py-2 px-4 border">Product</th>
+              <th className="py-2 px-4 border">Name</th>
+              <th className="py-2 px-4 border">Price</th>
+              <th className="py-2 px-4 border">Description</th>
+              <th className="py-2 px-4 border">Category</th>
+              <th className="py-2 px-4 border">Stock Status</th>
+              <th className="py-2 px-4 border">Quantity Available</th>
+              <th className="py-2 px-4 border">Actions</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            {storeProducts.map((item, index) => {
+              return (
+                <tr
+                  className="text-gray-800 hover:bg-gray-50 hover:text-black cursor-pointer"
+                  key={item._id}
+                >
+                  <td className="py-2 px-4 border text-center font-medium">
+                    {index + 1}
+                  </td>
+                  <td className="py-2 px-4 border">
+                    <img
+                      src={item.product_image}
+                      alt={item.product_name}
+                      className="w-16 h-16 object-cover"
+                    />
+                  </td>
+                  <td className="py-2 px-4 border">{item.product_name}</td>
+                  <td className="py-2 px-4 border">
+                    {formatCurrency(item.product_price)}
+                  </td>
+                  <td className="py-2 px-4 border">
+                    {item.product_description}
+                  </td>
+                  <td className="py-2 px-4 border">{item.product_category}</td>
+                  <td className="py-2 px-4 border">
+                    {item.product_in_stock ? "In Stock" : "Out of Stock"}
+                  </td>
+                  <td className="py-2 px-4 border text-center">
+                    {item.product_quantity}
+                  </td>
+                  <td className="py-2 px-4 border">
+                    <span className="flex gap-3">
+                      <EditProduct
+                        productId={item._id}
+                        productName={item.product_name}
+                        productDescription={item.product_description}
+                        productPrice={item.product_price}
+                        productQuantity={item.product_quantity}
+                        stockStatus={
+                          item.product_in_stock ? "In Stock" : "Out of Stock"
+                        }
+                        productImage={item.product_image}
+                        productCategory={item.product_category}
                       />
-                    </td>
-                    <td className="py-2 px-4 border">{item.product_name}</td>
-                    <td className="py-2 px-4 border">
-                      {formatCurrency(item.product_price)}
-                    </td>
-                    <td className="py-2 px-4 border">
-                      {item.product_description}
-                    </td>
-                    <td className="py-2 px-4 border">
-                      {item.product_category}
-                    </td>
-                    <td className="py-2 px-4 border">
-                      {item.product_in_stock ? "In Stock" : "Out of Stock"}
-                    </td>
-                    <td className="py-2 px-4 border">
-                      {item.product_quantity}
-                    </td>
-                    <td className="py-2 px-4 border">
-                      <span className="flex gap-3">
-                        <EditProduct
-                          productId={item._id}
-                          productName={item.product_name}
-                          productDescription={item.product_description}
-                          productPrice={item.product_price}
-                          productQuantity={item.product_quantity}
-                          stockStatus={
-                            item.product_in_stock ? "In Stock" : "Out of Stock"
-                          }
-                          productImage={item.product_image}
-                          productCategory={item.product_category}
-                        />
-                        <Button
-                          icon={<DeleteOutlined className="text-red-500" />}
-                          onClick={() => {
-                            setIsDeleteModalOpen(true);
-                            setSelectedProductId(item._id);
-                          }}
-                          title="Delete Product"
-                          
-                        />
-                      </span>
-                    </td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
-        </div>
+                      <Button
+                        icon={<DeleteOutlined className="text-red-500" />}
+                        onClick={() => {
+                          setIsDeleteModalOpen(true);
+                          setSelectedProductId(item._id);
+                        }}
+                        title="Delete Product"
+                      />
+                    </span>
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
       </div>
 
       <Modal

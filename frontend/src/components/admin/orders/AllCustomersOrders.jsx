@@ -39,15 +39,15 @@ const AllCustomersOrders = () => {
 
 
   return (
-    <section className="max-w-[1100px] mx-auto py-16 px-4">
+    <section className="overflow-y-auto">
       <h2 className="text-2xl my-4 leading-6 text-gray-700 text-center font-bold">
         All Orders
       </h2>
       <div>
         {/* Dashboard data */}
-        <div className="overflow-x-auto">
+        <div className="bg-white overflow-auto">
           <table className="table-auto w-full border border-gray-900 rounded-lg">
-            <thead className="bg-gray-100 text-gray-800 text-left">
+            <thead className="bg-gray-300 text-gray-800 text-left">
               <tr>
                 <th className="py-2 px-4 border">Date</th>
                 <th className="py-2 px-4 border">Name</th>
@@ -63,7 +63,7 @@ const AllCustomersOrders = () => {
               {customersOrders.map((item) => {
                 return (
                   <tr
-                    className="text-gray-500 hover:bg-gray-50 hover:text-black cursor-pointer"
+                    className="text-gray-800 hover:bg-gray-50 hover:text-black"
                     key={item._id}
                   >
                     <td className="py-2 px-4 border">
@@ -85,7 +85,12 @@ const AllCustomersOrders = () => {
                       {item.userCartSummary.totalCartItems}
                     </td>
                     <td className="py-2 px-4 border">
-                      <Link to={`/admin/${item._id}`}>View</Link>
+                      <Link
+                        to={`/admin/${item._id}`}
+                        className="bg-sky-600 text-white p-2 rounded-md cursor-pointer"
+                      >
+                        View
+                      </Link>
                     </td>
                   </tr>
                 );

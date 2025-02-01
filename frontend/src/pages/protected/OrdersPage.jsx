@@ -1,12 +1,8 @@
-import React from 'react'
-import AllCustomersOrders from '../../components/admin/orders/AllCustomersOrders'
+import React from "react";
+import AllCustomersOrders from "../../components/admin/orders/AllCustomersOrders";
 
 const OrderDetails = () => {
-  return (
-    <div>
-      <AllCustomersOrders />
-    </div>
-  )
-}
+  return <AllCustomersOrders />;
+};
 
-export default OrderDetails
+export default OrderDetails;

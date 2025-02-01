@@ -27,8 +27,7 @@ const Dashboard = () => {
   ];
 
   return (
-    <section className="p-6">
-      <h1 className="text-2xl font-bold mb-4">Admin Dashboard</h1>
+    <section className="p-2">
 
       {/* Stats Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">

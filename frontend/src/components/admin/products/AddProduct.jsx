@@ -76,91 +76,93 @@ const AddProduct = () => {
   console.log(productFormData);
 
   return (
-    <div className="flex items-center justify-center flex-col w-full min-h-screen">
+    <section>
       <BackButton />
-      <form className="flex flex-col gap-4 w-full max-w-[500px] border p-4 rounded-lg">
-        <h3 className="text-2xl text-blue-800 text-center">Add a Product</h3>
+      <div className="flex justify-center">
+        <form className="flex flex-col gap-4 bg-white w-full max-w-[500px] border p-4 rounded-lg shadow-md">
+          <h3 className="text-2xl text-blue-800 text-center">Add a Product</h3>
 
-        <Input
-          onChange={(e) =>
-            setProductFormData({
-              ...productFormData,
-              product_name: e.target.value,
-            })
-          }
-          placeholder="Enter product name"
-          size="large"
-        />
-        <Input
-          onChange={(e) =>
-            setProductFormData({
-              ...productFormData,
-              product_description: e.target.value,
-            })
-          }
-          placeholder="Enter product description"
-          size="large"
-        />
-        <InputNumber
-          onChange={(value) =>
-            setProductFormData({
-              ...productFormData,
-              product_price: value,
-            })
-          }
-          style={{
-            width: "100%",
-          }}
-          placeholder="Enter a product price"
-          size="large"
-        />
-        <Select
-          showSearch
-          placeholder="Select a product category"
-          filterOption={(input, option) =>
-            (option?.label ?? "").toLowerCase().includes(input.toLowerCase())
-          }
-          options={[
-            {
-              value: "fruits",
-              label: "Fruits",
-            },
-            {
-              value: "vegetables",
-              label: "Vegetables",
-            },
-            {
-              value: "dairy",
-              label: "Dairy",
-            },
-            {
-              value: "grains",
-              label: "Grain",
-            },
-          ]}
-          onChange={(value) =>
-            setProductFormData({
-              ...productFormData,
-              product_category: value,
-            })
-          }
-        />
-        <Input
-          onChange={(e) =>
-            setProductFormData({
-              ...productFormData,
-              product_image: e.target.value,
-            })
-          }
-          placeholder="Enter a product image url"
-          size="large"
-        />
+          <Input
+            onChange={(e) =>
+              setProductFormData({
+                ...productFormData,
+                product_name: e.target.value,
+              })
+            }
+            placeholder="Enter product name"
+            size="large"
+          />
+          <Input
+            onChange={(e) =>
+              setProductFormData({
+                ...productFormData,
+                product_description: e.target.value,
+              })
+            }
+            placeholder="Enter product description"
+            size="large"
+          />
+          <InputNumber
+            onChange={(value) =>
+              setProductFormData({
+                ...productFormData,
+                product_price: value,
+              })
+            }
+            style={{
+              width: "100%",
+            }}
+            placeholder="Enter a product price"
+            size="large"
+          />
+          <Select
+            showSearch
+            placeholder="Select a product category"
+            filterOption={(input, option) =>
+              (option?.label ?? "").toLowerCase().includes(input.toLowerCase())
+            }
+            options={[
+              {
+                value: "fruits",
+                label: "Fruits",
+              },
+              {
+                value: "vegetables",
+                label: "Vegetables",
+              },
+              {
+                value: "dairy",
+                label: "Dairy",
+              },
+              {
+                value: "grains",
+                label: "Grain",
+              },
+            ]}
+            onChange={(value) =>
+              setProductFormData({
+                ...productFormData,
+                product_category: value,
+              })
+            }
+          />
+          <Input
+            onChange={(e) =>
+              setProductFormData({
+                ...productFormData,
+                product_image: e.target.value,
+              })
+            }
+            placeholder="Enter a product image url"
+            size="large"
+          />
 
-        <Button onClick={handleAddProduct} loading={isLoading} type="primary">
-          Add Product
-        </Button>
-      </form>
-    </div>
+          <Button onClick={handleAddProduct} loading={isLoading} type="primary">
+            Add Product
+          </Button>
+        </form>
+      </div>
+    </section>
   );
 };
 
