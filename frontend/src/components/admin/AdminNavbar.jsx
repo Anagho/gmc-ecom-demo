@@ -29,8 +29,8 @@ const AdminNavbar = () => {
 
   return (
     <nav className="bg-gray-200 shadow-md p-2 px-4 flex justify-between items-center">
-      <h1 className="font-semibold hidden text-lg md:text-xl text-green-700">Admin Dashboard</h1>
-      <div className="flex items-center gap-6 md:gap-4 sm:gap-2 whitespace-nowrap">
+      <h1 className="font-semibold hidden md:block text-lg md:text-xl text-green-700">Admin Dashboard</h1>
+      <div className="flex items-center ml-auto gap-6 md:gap-4 sm:gap-2 whitespace-nowrap">
         {/* Date & Time */}
         <div className="hidden md:flex flex-col text-center text-sm">
           <div className="flex items-center gap-2">

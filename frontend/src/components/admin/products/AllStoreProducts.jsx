@@ -70,7 +70,7 @@ const AllStoreProducts = () => {
       </div>
 
       <div className="overflow-auto bg-white">
-        <table className="table-auto w-full border rounded-lg">
+        <table className="table-auto w-full text-sm sm:text-lg">
           <thead className="bg-gray-300 text-gray-800 text-center">
             <tr>
               <th className="py-2 px-4 border">S/N</th>

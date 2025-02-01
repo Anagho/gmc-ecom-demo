@@ -46,7 +46,7 @@ const AllCustomersOrders = () => {
       <div>
         {/* Dashboard data */}
         <div className="bg-white overflow-auto">
-          <table className="table-auto w-full border border-gray-900 rounded-lg">
+          <table className="table-auto w-full text-sm sm:text-lg">
             <thead className="bg-gray-300 text-gray-800 text-left">
               <tr>
                 <th className="py-2 px-4 border">Date</th>
