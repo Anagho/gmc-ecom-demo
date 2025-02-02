@@ -45,7 +45,7 @@ const Login = () => {
       );
 
       if (response.data.status === "success") {
-        localStorage.setItem('user', JSON.stringify(response.data.user))
+        localStorage.setItem("user", JSON.stringify(response.data.user));
         dispatch(updateUser(response.data.user));
       }
 
@@ -161,7 +161,7 @@ const Login = () => {
 
               <button class="w-full border border-gray-300 text-md p-2 outline-none rounded-lg mb-6 hover:bg-black hover:text-white hover:border-transparent transition-background duration-300 ease-linear">
                 <img
-                  src="../public/images/google-color-icon.svg"
+                  src="/images/google-color-icon.svg"
                   alt="google"
                   class="w-6 h-6 inline mr-2"
                 />
@@ -180,7 +180,7 @@ const Login = () => {
           {/* Image with Text Overlay */}
           <div class="relative">
             <img
-              src="../public/images/organic-01.jpg"
+              src="/images/organic-01.jpg"
               class="w-[400px] h-full hidden rounded-r-2xl md:block object-cover opacity-80"
               alt="Login background"
             />

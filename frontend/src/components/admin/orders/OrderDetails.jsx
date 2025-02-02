@@ -110,7 +110,7 @@ const OrderDetails = () => {
         <table className="table-auto w-full border border-gray-200 rounded-lg">
           <thead className="bg-gray-100 text-gray-800 text-left">
             <tr>
-              <th className="py-2 px-4 border">Product ID</th>
+              <th className="py-2 px-4 border">Order ID</th>
               <th className="py-2 px-4 border">Product Image</th>
               <th className="py-2 px-4 border">Product Name</th>
               <th className="py-2 px-4 border">Price</th>
@@ -125,7 +125,9 @@ const OrderDetails = () => {
                   index % 2 === 0 ? "bg-white" : "bg-gray-50"
                 } text-gray-800`}
               >
-                <td className="py-2 px-4 border">{item.product_id}</td>
+                <td className="py-2 px-4 border">
+                  {item._id}
+                </td>
                 <td className="py-2 px-4 border">
                   <img
                     src={item.product_image}

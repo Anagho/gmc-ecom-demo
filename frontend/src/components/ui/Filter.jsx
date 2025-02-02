@@ -43,7 +43,13 @@ const Filter = ({ productOptions, searchValue, selectedFilter }) => {
   }
 
   function handleProductSearch(productName) {
+
+    if (typeof productName !== "string") return;
+
     const searchedProducts = products.filter((item) => {
+       if (!item.product_name || typeof item.product_name !== "string")
+         return false;
+        
       return item.product_name
         .toLowerCase()
         .includes(productName.toLowerCase());

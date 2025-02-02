@@ -5,6 +5,7 @@ import cors from "cors";
 import orderRoutes from "./routes/ordersRoutes.js";
 import authRoutes from "./routes/authRoutes.js";
 import productRoutes from "./routes/productsRoutes.js";
+import userRoutes from "./routes/usersRoute.js";
 import { connectToDatabase } from "./config/mongodbConnection.js";
 
 const PORT = 3000;
@@ -29,6 +30,7 @@ app.get("/", (req, res) => {
 app.use("/api/v1/order", orderRoutes);
 app.use("/api/v1/auth", authRoutes);
 app.use("/api/v1/product", productRoutes);
+app.use("/api/v1/user", userRoutes);
 
 app.listen(PORT, async () => {
   await connectToDatabase();

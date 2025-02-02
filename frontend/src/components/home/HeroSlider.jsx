@@ -75,7 +75,7 @@ const HeroSlider = () => {
           >
             <section className="container mx-auto">
               <div className="absolute inset-0 bg-black bg-opacity-50 -z-10"></div>
-              <div className="w-[90%] sm:w-[80%] md:w-[50%] lg:w-[40%] z-10 px-4 sm:px-8">
+              <div className="w-[60%] ml-10 md:ml-0 sm:w-[80%] md:w-[50%] lg:w-[40%] z-[9999] px-4 sm:px-8">
                 <h1 className="text-2xl md:text-3xl lg:text-5xl font-normal mb-6">
                   Shop{" "}
                   <span className="text-green-600 font-semibold">
@@ -103,7 +103,7 @@ const HeroSlider = () => {
           >
             <section className="container mx-auto">
               <div className="absolute inset-0 bg-black bg-opacity-50 -z-10"></div>
-              <div className="w-[90%] sm:w-[80%] md:w-[50%] lg:w-[40%] z-10 px-4 sm:px-8">
+              <div className="w-[60%] ml-10 md:ml-0 md:w-[50%] lg:w-[40%] z-[9999] px-4 sm:px-8">
                 <h1 className="text-2xl md:text-3xl lg:text-5xl font-normal mb-6">
                   Shop{" "}
                   <span className="text-green-600 font-semibold">
@@ -131,7 +131,7 @@ const HeroSlider = () => {
           >
             <section className="container mx-auto">
               <div className="absolute inset-0 bg-black bg-opacity-50 -z-10"></div>
-              <div className="absolute top-20 right-5 sm:right-10 w-[90%] sm:w-[60%] md:w-[50%] lg:w-[40%] z-10 px-4 sm:px-8">
+              <div className="absolute top-20 left-[50%] w-[50%] sm:w-[60%] md:w-[50%] lg:w-[40%] z-[999] px-4 sm:px-8">
                 <h1 className="text-2xl md:text-3xl lg:text-5xl font-normal mb-6 leading-8">
                   Shop{" "}
                   <span className="text-green-600 font-semibold">
