@@ -50,6 +50,7 @@ const OrderDetails = () => {
         </span>
       </p>
       <h3 className="text-base mb-6">
+        <span className="font-semibold pr-2">Order Delivery Status: </span>
         <span
           className={`p-2 rounded-md font-bold ${
             orderInformation.orderStatus === "Completed"

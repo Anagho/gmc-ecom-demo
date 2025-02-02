@@ -69,7 +69,7 @@ const AddProduct = () => {
       if (response.data.status === "success") {
         console.log(response);
         dispatch(addProduct(response.data.product));
-        messageApi.success("product added successfully");
+        messageApi.success(response.data.message);
 
         // Clear input fields
         setProductFormData({

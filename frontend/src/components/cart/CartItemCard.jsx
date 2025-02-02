@@ -24,8 +24,9 @@ const CartItemCard = ({
         <div>
           <h3 className="text-base md:text-lg font-medium">{product_name}</h3>
           <p className="text-gray-500 font-light">
-            <span className="mr-2">{formatCurrency(product_price)}</span> X{" "}
+            <span className="mr-2">{formatCurrency(product_price)}</span> X{" "}S
             <span className="ml-2">{product_quantity}</span>
+            <span className="block font-semibold">{formatCurrency(product_price * product_quantity)}</span>
           </p>
         </div>
 

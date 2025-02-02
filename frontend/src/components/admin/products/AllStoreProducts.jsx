@@ -135,6 +135,7 @@ const AllStoreProducts = () => {
                         }
                         productImage={item.product_image}
                         productCategory={item.product_category}
+                        refreshProducts={getStoreProducts}
                       />
                       <Button
                         icon={<DeleteOutlined className="text-red-500" />}

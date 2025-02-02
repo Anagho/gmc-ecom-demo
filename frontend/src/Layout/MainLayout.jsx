@@ -6,8 +6,12 @@ function MainLayout() {
   const location = useLocation();
   return (
     <div>
-      {!location.pathname.includes("admin") && <Announcement />}
-      {!location.pathname.includes("admin") && <Navbar />}
+      {!location.pathname.includes("admin") &&
+        !location.pathname.includes("login") &&
+        !location.pathname.includes("register") && <Announcement />}
+      {!location.pathname.includes("admin") &&
+        !location.pathname.includes("login") &&
+        !location.pathname.includes("register") && <Navbar />}
       <Outlet />
     </div>
   );
