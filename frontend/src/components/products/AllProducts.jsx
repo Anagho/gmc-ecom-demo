@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import ProductList from "./ProductList";
 import axios from "axios";
 import { serverUrl } from "../../utils/helper";
@@ -7,6 +7,7 @@ import { useDispatch } from "react-redux";
 
 function AllProducts() {
   const dispatch = useDispatch();
+  const [loading, setLoading] = useState(false);
 
   async function getProducts() {
     try {

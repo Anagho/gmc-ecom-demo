@@ -7,7 +7,7 @@ function ProductList() {
 
   // console.log(products)
   return (
-    <section className="flex gap-8 flex-wrap">
+    <section className="flex gap-2 sm:gap-4 md:gap-8 flex-wrap">
       {products.map((item) => {
         return (
           <ProductCard
