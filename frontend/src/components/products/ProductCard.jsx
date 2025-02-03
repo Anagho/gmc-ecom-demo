@@ -17,16 +17,16 @@ const ProductCard = ({
         alt={product_name}
       />
       <div className="p-4">
-        <h1 className="font-semibold text-sm lg:font-bold md:text-lg mb-1">
+        <h1 className="font-semibold text-sm md:text-base lg:font-bold mb-1">
           {product_name}
         </h1>
-        <p className="mb-2 text-xs sm:text-sm md:text-lg">
+        <p className="mb-2 text-xs sm:text-sm md:text-base">
           {formatCurrency(product_price)}
         </p>
 
         <Link
           to={`/products/${product_id}`}
-          className="text-sx sm:text-sm md:text-lg"
+          className="text-sx sm:text-sm md:text-base"
         >
           <Button block color="cyan" variant="solid">
             View Item
