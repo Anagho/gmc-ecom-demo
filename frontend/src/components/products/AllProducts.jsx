@@ -10,6 +10,7 @@ function AllProducts() {
   const [loading, setLoading] = useState(false);
 
   async function getProducts() {
+    setLoading(true);
     try {
       const response = await axios.get(`${serverUrl}/product/all-products`);
 
@@ -18,12 +19,24 @@ function AllProducts() {
       
     } catch (error) {
       console.log(error);
+    } finally {
+      setLoading(false)
     }
   }
 
   useEffect(() => {
     getProducts();
   }, []);
+
+    if (loading) {
+      return (
+        <div className="flex items-center justify-center h-screen bg-gray-100">
+          <h1 className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-600 font-semibold animate-pulse">
+            Loading store products...
+          </h1>
+        </div>
+      );
+    }
 
   return (
     <section>
