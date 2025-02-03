@@ -66,8 +66,8 @@ const AllStoreProducts = () => {
   return (
     <section className="overflow-y-auto">
       {contextHolder}
-      <div className="flex justify-between items-center my-6 ">
-        <h2 className="text-2xl text-gray-700 font-medium">All Products</h2>
+      <div className="flex justify-between items-center my-6 text-lg sm:text-xl lg:text-2xl">
+        <h2 className="text-gray-700 font-medium sm:mx-auto">All Products</h2>
         <Link to={"/admin/add-product"}>
           <Button type="primary" size="large">
             Create a Product
@@ -76,7 +76,7 @@ const AllStoreProducts = () => {
       </div>
 
       <div className="overflow-auto bg-white">
-        <table className="table-auto w-full text-sm sm:text-lg">
+        <table className="table-auto w-full text-sm">
           <thead className="bg-gray-300 text-gray-800 text-center">
             <tr>
               <th className="py-2 px-4 border">S/N</th>
@@ -95,7 +95,7 @@ const AllStoreProducts = () => {
             {storeProducts.map((item, index) => {
               return (
                 <tr
-                  className="text-gray-800 hover:bg-gray-50 hover:text-black cursor-pointer"
+                  className="text-sm text-gray-800 hover:bg-gray-50 hover:text-black cursor-pointer"
                   key={item._id}
                 >
                   <td className="py-2 px-4 border text-center font-medium">
@@ -108,12 +108,14 @@ const AllStoreProducts = () => {
                       className="w-16 h-16 object-cover"
                     />
                   </td>
-                  <td className="py-2 px-4 border">{item.product_name}</td>
-                  <td className="py-2 px-4 border">
+                  <td className="py-2 px-4 border font-semibold">
+                    {item.product_name}
+                  </td>
+                  <td className="py-2 px-4 border font-semibold">
                     {formatCurrency(item.product_price)}
                   </td>
                   <td className="py-2 px-4 border">
-                    {item.product_description}
+                    {item.product_description.slice(0, 25) + "..."}
                   </td>
                   <td className="py-2 px-4 border">{item.product_category}</td>
                   <td className="py-2 px-4 border">

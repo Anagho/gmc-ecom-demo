@@ -10,13 +10,24 @@ const ProductCard = ({
   product_name,
 }) => {
   return (
-    <div className="border p-1 rounded-md hover:shadow-2xl transition-all duration-500">
-      <img src={product_image} alt={product_name} />
+    <div className="border w-48 sm:w-52 md:w-64 rounded-md hover:shadow-2xl transition-all duration-500">
+      <img
+        className="h-28 sm:h-40 w-full object-cover"
+        src={product_image}
+        alt={product_name}
+      />
       <div className="p-4">
-        <h1 className="font-bold text-lg mb-1">{product_name}</h1>
-        <p className="mb-2">{formatCurrency(product_price)}</p>
+        <h1 className="font-semibold text-sm lg:font-bold md:text-lg mb-1">
+          {product_name}
+        </h1>
+        <p className="mb-2 text-xs sm:text-sm md:text-lg">
+          {formatCurrency(product_price)}
+        </p>
 
-        <Link to={`/products/${product_id}`}>
+        <Link
+          to={`/products/${product_id}`}
+          className="text-sx sm:text-sm md:text-lg"
+        >
           <Button block color="cyan" variant="solid">
             View Item
           </Button>
