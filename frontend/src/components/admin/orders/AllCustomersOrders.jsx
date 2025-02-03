@@ -40,13 +40,13 @@ const AllCustomersOrders = () => {
 
   return (
     <section className="overflow-y-auto">
-      <h2 className="text-2xl my-4 leading-6 text-gray-700 text-center font-bold">
+      <h2 className="text-lg sm:text-xl lg:text-2xl font-medium  my-4 leading-6 text-gray-700 text-center">
         All Orders
       </h2>
       <div>
         {/* Dashboard data */}
         <div className="bg-white overflow-auto">
-          <table className="table-auto w-full text-sm sm:text-lg">
+          <table className="table-auto w-full text-sm sm:text-base">
             <thead className="bg-gray-300 text-gray-800 text-left">
               <tr>
                 <th className="py-2 px-4 border">Date</th>
@@ -63,7 +63,7 @@ const AllCustomersOrders = () => {
               {customersOrders.map((item) => {
                 return (
                   <tr
-                    className="text-gray-800 hover:bg-gray-50 hover:text-black"
+                    className="text-sm sm:text-base text-gray-800 hover:bg-gray-50 hover:text-black"
                     key={item._id}
                   >
                     <td className="py-2 px-4 border">

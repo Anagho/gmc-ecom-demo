@@ -42,7 +42,7 @@ const OrderDetails = () => {
     <div className="bg-white shadow-md rounded-lg p-2">
       <BackButton />
       <p className="text-lg font-semibold text-gray-700 mb-4">
-        Order Date:{" "}
+        Order Date:
         <span className="font-normal text-gray-600">
           {moment(new Date(orderInformation.createdAt)).format(
             "MMMM Do YYYY, h:mm:ss a"

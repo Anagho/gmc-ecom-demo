@@ -76,7 +76,7 @@ const AllStoreProducts = () => {
       </div>
 
       <div className="overflow-auto bg-white">
-        <table className="table-auto w-full text-sm">
+        <table className="table-auto w-full text-sm sm:text-base">
           <thead className="bg-gray-300 text-gray-800 text-center">
             <tr>
               <th className="py-2 px-4 border">S/N</th>
@@ -95,7 +95,7 @@ const AllStoreProducts = () => {
             {storeProducts.map((item, index) => {
               return (
                 <tr
-                  className="text-sm text-gray-800 hover:bg-gray-50 hover:text-black cursor-pointer"
+                  className="text-sm sm:text-base text-gray-800 hover:bg-gray-50 hover:text-black cursor-pointer"
                   key={item._id}
                 >
                   <td className="py-2 px-4 border text-center font-medium">

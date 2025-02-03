@@ -7,30 +7,32 @@ import {
   FaBars,
   FaTimes,
   FaHome,
-  FaCogs,
+  FaUsers, FaCog
 } from "react-icons/fa";
 
 const AdminSidebar = () => {
-  const [isCollapsed, setIsCollapsed] = useState(false);
+  const [isCollapsed, setIsCollapsed] = useState(true);
   const location = useLocation();
 
   const menuItems = [
-    { name: "Dashboard", icon: <FaChartBar />, path: "/admin" },
-    { name: "Products", icon: <FaBox />, path: "/admin/products" },
-    { name: "Orders", icon: <FaShoppingCart />, path: "/admin/orders" },
-    { name: "Visit Site", icon: <FaHome />, path: "/"},
-    {name: "Settings", icon: <FaCogs />, path:"/"}
+    { name: "Dashboard", icon: <FaChartBar />, path: "/admin", title: "Dashboard" },
+    { name: "Products", icon: <FaBox />, path: "/admin/products", title: "Products" },
+    { name: "Orders", icon: <FaShoppingCart />, path: "/admin/orders", title: "Orders" },
+    { name: "Users", icon: <FaUsers />, path: "/admin/users", title: "Users"},
+    {name: "Settings", icon: <FaCog />, path:"/", title: "Settings"}
   ];
 
   return (
     <aside
       className={`h-screen bg-gray-800 text-white ${
-        isCollapsed ? "w-16" : "w-64"
+        isCollapsed ? "w-16" : "w-40"
       } transition-all duration-300 flex flex-col`}
     >
       {/* Toggle Button */}
       <button
-        className="p-4 focus:outline-none text-lg flex justify-end"
+        className={`p-4 focus:outline-none text-lg flex ${
+          isCollapsed ? "justify-center" : "justify-end"
+        } `}
         onClick={() => setIsCollapsed(!isCollapsed)}
       >
         {isCollapsed ? <FaBars /> : <FaTimes />}
@@ -42,6 +44,7 @@ const AdminSidebar = () => {
           <Link
             key={item.name}
             to={item.path}
+            title={item.title}
             className={`flex items-center gap-3 p-3 mx-2 rounded-md transition ${
               location.pathname === item.path
                 ? "bg-blue-600"

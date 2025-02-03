@@ -17,6 +17,8 @@ import AddProductPage from "./pages/protected/AddProductPage";
 import NotFound from "./pages/NotFound";
 import ProductsPage from "./pages/protected/ProductsPage";
 import OrdersPage from "./pages/protected/OrdersPage";
+import UsersPage from "./pages/protected/UsersPage";
+import UserDetails from "./components/admin/users/UserDetails";
 
 function App() {
   return (
@@ -37,9 +39,11 @@ function App() {
           <Route path="admin" element={<ProtectedAdminLayout />}>
             <Route index element={<Admin />} />
             <Route path=":order_id" element={<OrderDetails />} />
+            <Route path="user/:user_id" element={<UserDetails />} />
             <Route path="add-product" element={<AddProductPage />} />
             <Route path="products" element={<ProductsPage />} />
             <Route path="orders" element={<OrdersPage />} />
+            <Route path="users" element={<UsersPage />} />
           </Route>
 
           <Route path="profile" element={<UserProfile />} />

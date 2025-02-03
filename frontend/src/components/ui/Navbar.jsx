@@ -9,9 +9,13 @@ import {
   DownOutlined,
   HeartOutlined,
   ShoppingOutlined,
-  ShopOutlined, DashboardOutlined
+  ShopOutlined,
+  DashboardOutlined,
+  BoxPlotOutlined,
+  CarryOutOutlined,
 } from "@ant-design/icons";
 import { Avatar, Space, Dropdown } from "antd";
+import { FaBox } from "react-icons/fa";
 
 function Navbar() {
   const { cartItems } = useSelector((state) => state.cart);
@@ -84,32 +88,46 @@ function Navbar() {
       ),
       key: "4",
     },
-   
   ];
 
   const dropDownItems2 = [
     {
       label: (
-        <Space className="text-[1rem]">
-          <UserOutlined className="text-2xl" /> <span>My Account</span>
-        </Space>
+        <NavLink to={user.userType === "admin" ? "/admin" : "/profile"}>
+          <Space className="text-[1rem]">
+            <UserOutlined className="text-2xl" /> <span>My Account</span>
+          </Space>
+        </NavLink>
       ),
       key: "2",
     },
     {
       label: (
-        <Space className="text-[1rem]">
-          <ShoppingOutlined className="text-2xl" /> <span>Orders</span>
-        </Space>
+        <NavLink
+          to={user.userType === "admin" ? "/admin/orders" : "/profile/orders"}
+        >
+          <Space className="text-[1rem]">
+            <ShoppingOutlined className="text-2xl" /> <span>Orders</span>
+          </Space>
+        </NavLink>
       ),
       key: "3",
     },
     {
-      label: (
-        <Space className="text-[1rem]">
-          <HeartOutlined className="text-2xl" /> <span>Wishlist</span>
-        </Space>
-      ),
+      label:
+        user.userType === "admin" ? (
+          <NavLink to={"/admin/products"}>
+            <Space className="text-[1rem]">
+              <CarryOutOutlined className="text-2xl" /> <span>Products</span>
+            </Space>
+          </NavLink>
+        ) : (
+          <NavLink to={"/admin/products"}>
+            <Space className="text-[1rem]">
+              <HeartOutlined className="text-2xl" /> <span>Wishlist</span>
+            </Space>
+          </NavLink>
+        ),
       key: "4",
     },
     {
@@ -117,7 +135,10 @@ function Navbar() {
     },
     {
       label: (
-        <button onClick={handleUserLogout} className="bg-orange-400 text-white w-full p-2 text-medium font-semibold shadow-lg rounded-md">
+        <button
+          onClick={handleUserLogout}
+          className="bg-orange-400 text-white w-full p-2 text-medium font-semibold shadow-lg rounded-md"
+        >
           Logout
         </button>
       ),
