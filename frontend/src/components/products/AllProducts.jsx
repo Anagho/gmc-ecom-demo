@@ -31,7 +31,7 @@ function AllProducts() {
     if (loading) {
       return (
         <div className="flex items-center justify-center h-60 bg-gray-100">
-          <h1 className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-600 font-semibold animate-pulse">
+          <h1 className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-600 font-semibold animate-pulse">
             Loading store products...
           </h1>
         </div>
