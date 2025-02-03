@@ -10,7 +10,7 @@ const ProductCard = ({
   product_name,
 }) => {
   return (
-    <div className="border w-36 md:w-48 rounded-md hover:shadow-2xl transition-all duration-500">
+    <div className="border w-40 sm:w-48 md:w-52 lg:w-56 rounded-md hover:shadow-2xl transition-all duration-500">
       <img
         className="h-28 sm:h-40 w-full object-cover"
         src={product_image}
