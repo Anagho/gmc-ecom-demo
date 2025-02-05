@@ -93,7 +93,7 @@ function Navbar() {
   const dropDownItems2 = [
     {
       label: (
-        <NavLink to={user.userType === "admin" ? "/admin" : "/profile"}>
+        <NavLink to={user && user.userType === "admin" ? "/admin" : "/profile"}>
           <Space className="text-[1rem]">
             <UserOutlined className="text-2xl" /> <span>My Account</span>
           </Space>
@@ -104,7 +104,7 @@ function Navbar() {
     {
       label: (
         <NavLink
-          to={user.userType === "admin" ? "/admin/orders" : "/profile/orders"}
+          to={user && user.userType === "admin" ? "/admin/orders" : "/profile/orders"}
         >
           <Space className="text-[1rem]">
             <ShoppingOutlined className="text-2xl" /> <span>Orders</span>
@@ -114,7 +114,7 @@ function Navbar() {
       key: "3",
     },
     {
-      label:
+      label: user &&
         user.userType === "admin" ? (
           <NavLink to={"/admin/products"}>
             <Space className="text-[1rem]">

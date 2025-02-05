@@ -1,6 +1,9 @@
 import { UserModel } from "../../models/userModel/userModel.js";
 import validator from "validator";
 import bcrypt from "bcryptjs";
+import { generateVerificationToken } from "../../utils/generateVerificationToken.js";
+import { generateTokenAndSetCookie } from "../../utils/generateTokenAndSetCookie.js";
+import { sendVerificationEmail } from "../../mailtrap/emails.js";
 
 async function registerUser(req, res) {
   const { email, name, password } = req.body;
@@ -12,12 +15,10 @@ async function registerUser(req, res) {
   }
 
   if (validator.isEmail(email) === false) {
-    return res
-      .status(400)
-      .json({
-        message: "Please provide a valid email address",
-        status: "failed",
-      });
+    return res.status(400).json({
+      message: "Please provide a valid email address",
+      status: "failed",
+    });
   }
 
   if (
@@ -37,19 +38,70 @@ async function registerUser(req, res) {
   const salt = await bcrypt.genSalt(10);
   const hashPassword = await bcrypt.hash(password, salt);
 
-  // register user here
   try {
+    // Check if a user already exists
+    const userAlreadyExist = await UserModel.findOne({ email });
+    if (userAlreadyExist) {
+      return res.status(400).json({
+        message: "User already exists",
+        success: "false",
+        status: "failed",
+      });
+    }
+
+    // Token to verify a user during signup
+    const verificationToken = generateVerificationToken();
+
+    // register user here
     const user = new UserModel({
       name: name,
       email: email,
       password: hashPassword,
+      verificationToken,
+      verificationTokenExpiresAt: Date.now() + 24 * 60 * 60 * 1000, // 24hrs, 1000 is one milli seconds
     });
     await user.save();
 
-    res.status(201).json({ message: "Account created successfully", status: "success" });
+    // jwt
+    generateTokenAndSetCookie(res, user._id);
+
+    // Send verification email
+    await sendVerificationEmail(user.email, verificationToken);
+
+    res.status(201).json({
+      success: true,
+      message: "Account created successfully",
+      status: "success",
+      user: {
+        ...user._doc,
+        password: undefined,
+      },
+    });
   } catch (error) {
     res.status(400).json({ message: error.message, status: "failed" });
   }
 }
 
-export { registerUser };
+async function verifyEmail(req, res) {
+  // 1 2 3 4 5 6
+  const { code } = req.body;
+  try {
+    const user = await UserModel.findOne({
+      verificationToken: code,
+      verificationTokenExpiresAt: { $gt: Date.now() },
+    })
+
+    if (!user) {
+      return res.status(400).json({ success: false, message: "Invalid or expired verification code"})
+    }
+
+    user.isVerified = true;
+    user.verificationToken = undefined
+    user.verificationTokenExpiresAt = undefined
+    await user.save();
+
+    await sendWelcomeEmail(user.email, user.name)
+  } catch (error) {}
+}
+
+export { registerUser, verifyEmail };
