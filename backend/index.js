@@ -1,11 +1,13 @@
 import "dotenv/config";
 import express from "express";
 import cors from "cors";
+import cookieParser from "cookie-parser";
 
 import orderRoutes from "./routes/ordersRoutes.js";
 import authRoutes from "./routes/authRoutes.js";
 import productRoutes from "./routes/productsRoutes.js";
 import userRoutes from "./routes/usersRoute.js";
+
 import { connectToDatabase } from "./config/mongodbConnection.js";
 
 const PORT = 3000;
@@ -21,7 +23,8 @@ app.use(
     ],
   })
 );
-app.use(express.json());
+app.use(express.json());  // allows us to parse incoming requests:req.body
+app.use(cookieParser());  // allows us to parse incoming cookies
 
 app.get("/", (req, res) => {
   res.status(200).json({ message: "server currently running" });
