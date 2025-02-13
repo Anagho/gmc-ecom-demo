@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import ProductList from "./ProductList";
+import { Spin } from "antd";
 import axios from "axios";
 import { serverUrl } from "../../utils/helper";
 import { setProducts } from "../../features/product/productSlice";
@@ -29,13 +30,11 @@ function AllProducts() {
   }, []);
 
     if (loading) {
-      return (
-        <div className="flex items-center justify-center h-60 bg-gray-100">
-          <h1 className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-600 font-semibold animate-pulse">
-            Loading store products...
-          </h1>
-        </div>
-      );
+       return (
+         <div className="flex justify-center items-center">
+           <Spin size="large" />
+         </div>
+       );
     }
 
   return (

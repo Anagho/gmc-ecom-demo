@@ -8,7 +8,7 @@ import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 
 const AdminNavbar = () => {
-  const { user } = useSelector((state) => state.user);
+  const { user } = useSelector((state) => state.auth);
   const [time, setTime] = useState(new Date());
 
   useEffect(() => {

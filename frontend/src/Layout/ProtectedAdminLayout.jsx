@@ -4,14 +4,11 @@ import AdminSidebar from "../components/admin/AdminSidebar";
 import AdminNavbar from "../components/admin/AdminNavbar";
 
 const ProtectedAdminLayout = () => {
-  const { user } = useSelector((state) => state.user);
+  const { user } = useSelector((state) => state.auth);
 
-  
-  if (user == null && user.userType !== "admin") {
-    return <Navigate to={"/profile"} />;
-  }
-
-  return (
+  return user !== null && user.userType !== "admin" ? (
+    <Navigate to={"/profile"} />
+  ) : (
     <main className="flex h-screen">
       <AdminSidebar />
 

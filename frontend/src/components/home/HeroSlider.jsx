@@ -6,6 +6,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { useRef, useState } from "react";
+import { motion } from "framer-motion";
 
 const HeroSlider = () => {
   const prevRef = useRef(null);
@@ -23,7 +24,7 @@ const HeroSlider = () => {
         ref={prevRef}
         className={`absolute left-2 sm:left-5 top-1/2 transform -translate-y-1/2 z-20 
   bg-white text-gray-800 p-2 sm:p-3 md:p-4 px-4 sm:px-5 text-lg sm:text-xl md:text-2xl 
-  rounded-full shadow-md hover:bg-orange-400 hover:text-white transition-opacity duration-300 
+  rounded-full shadow-md hover:bg-gradient-to-r hover:from-green-600 hover:to-emerald-700 hover:text-white transition-opacity duration-300 
   ${isHovered ? "opacity-100" : "opacity-10"} 
   sm:w-10 sm:h-10 md:w-12 md:h-12 flex items-center justify-center`}
       >
@@ -33,7 +34,7 @@ const HeroSlider = () => {
         ref={nextRef}
         className={`absolute right-2 sm:right-5 top-1/2 transform -translate-y-1/2 z-20 
   bg-white text-gray-800 p-2 sm:p-3 md:p-4 px-4 sm:px-5 text-lg sm:text-xl md:text-2xl 
-  rounded-full shadow-md hover:bg-orange-400 hover:text-white transition-opacity duration-300 
+  rounded-full shadow-md hover:bg-gradient-to-r hover:from-green-600 hover:to-emerald-700 hover:text-white transition-opacity duration-300 
   ${isHovered ? "opacity-100" : "opacity-10"} 
   sm:w-10 sm:h-10 md:w-12 md:h-12 flex items-center justify-center`}
       >

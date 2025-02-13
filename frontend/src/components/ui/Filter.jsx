@@ -10,7 +10,7 @@ const Filter = ({ productOptions, searchValue, selectedFilter }) => {
 
   // Get the products from the state
   const { products } = useSelector((state) => state.products);
-  console.log(products);
+  // console.log(products);
 
   async function getProducts(category) {
     try {

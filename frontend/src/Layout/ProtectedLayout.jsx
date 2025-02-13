@@ -1,12 +1,11 @@
-import React from 'react'
-import { Outlet, Navigate } from 'react-router'
-import { useSelector } from "react-redux"
+import React from "react";
+import { Outlet, Navigate } from "react-router";
+import { useSelector } from "react-redux";
 
 const ProtectedLayout = () => {
-    const { user } = useSelector((state) => state.user)
+  const { user } = useSelector((state) => state.auth);
+ 
+  return user === null ? <Navigate to={"/login"} /> : <Outlet />;
+};
 
-
-  return user === null ? <Navigate to={"/login"} /> : <Outlet />
-}
-
-export default ProtectedLayout
+export default ProtectedLayout;

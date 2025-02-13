@@ -1,29 +1,36 @@
-import { Button, Input } from "antd";
-import React, { useState } from "react";
+import { useState } from "react";
 import { Link, useNavigate } from "react-router";
-import axios from "axios";
 import validator from "validator";
+import { useDispatch, useSelector } from "react-redux";
+import { Lock, Mail, Loader } from "lucide-react";
+import Input from "../components/ui/inputs/Input";
+import { motion } from "framer-motion";
+import FloatingShape from "../components/ui/FloatingShape";
+import toast from "react-hot-toast";
+import axios from "axios";
 import { serverUrl } from "../utils/helper";
-import { updateUser } from "../features/user/userSlice";
-import { useDispatch } from "react-redux";
+import { loginUser, setLoading } from "../features/auth/authSlice";
 
 const Login = () => {
-  const [userFormData, setUserFormData] = useState({
+  const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const [isLoading, setIsLoading] = useState(false);
+  const { isLoading, error } = useSelector((state) => state.auth);
 
-  async function handleUserLogin() {
-    if (validator.isEmail(userFormData.email) === false) {
-      return alert("Please provide a valid email");
+  const handleLogin = async (e) => {
+    e.preventDefault();
+
+    if (validator.isEmail(formData.email) === false) {
+      return toast.error("Please provide a valid email");
     }
 
     if (
-      validator.isStrongPassword(userFormData.password, {
+      validator.isStrongPassword(formData.password, {
         minLength: 6,
         minLowercase: 1,
         minNumbers: 1,
@@ -31,169 +38,125 @@ const Login = () => {
         minUpperCase: 1,
       }) === false
     ) {
-      return alert(
+      return toast.error(
         "Password must contain UPPERCASE, lowercase, number, special character and a digit"
       );
     }
 
-    setIsLoading(true);
-    // Now we can login the user successfully
+    dispatch(setLoading(true));
+
     try {
-      const response = await axios.post(
-        `${serverUrl}/auth/login`,
-        userFormData
-      );
+      const response = await axios.post(`${serverUrl}/auth/login`, formData, {
+        withCredentials: true, // Allows sending and receiving cookies
+      });
+      // console.log(response.data.user);
+      const user = response.data.user;
+      const { userType } = response.data.user;
 
       if (response.data.status === "success") {
-        localStorage.setItem("user", JSON.stringify(response.data.user));
-        dispatch(updateUser(response.data.user));
+        dispatch(loginUser(user));
       }
+      navigate(userType === "admin" ? "/admin" : "/");
 
-      if (response.data.user.userType === "admin") {
-        return navigate("/admin");
-      }
-
-      navigate("/profile");
+      toast.success("Logged In Successfully");
     } catch (error) {
       console.log(error);
-      alert(error.response.data.message);
+      toast.error(error.response.data.message);
     } finally {
-      setIsLoading(false);
+      dispatch(setLoading(false));
     }
-  }
+  };
 
   return (
-    <>
-      {/* <div className="grid h-screen place-items-center p-2">
-        <form className="flex flex-col gap-4 w-full max-w-[500px] border p-4 rounded-lg">
-          <h3 className="text-2xl text-green-800 text-center">Welcome Back</h3>
-          <p className="text-gray-500 text-lg font-light text-center">
-            Enter your login details to continue
-          </p>
-          <Input
-            onChange={(e) =>
-              setUserFormData({ ...userFormData, email: e.target.value })
-            }
-            placeholder="Enter your email"
-            size="large"
-          />
-          <Input.Password
-            onChange={(e) =>
-              setUserFormData({ ...userFormData, password: e.target.value })
-            }
-            placeholder="Password"
-            size="large"
-          />
-          <Button
-            onClick={handleUserLogin}
-            loading={isLoading}
-            type="primary"
-            variant="solid"
-            color="green"
-          >
-            Login
-          </Button>
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-green-900 to-emerald-900 flex items-center justify-center relative overflow-hidden">
+      <FloatingShape
+        color="bg-green-500"
+        size="w-64 h-64"
+        top="-5%"
+        left="10%"
+        delay={0}
+      />
 
-          <p>
-            Don't have an account yet?{" "}
-            <Link className="font-semibold text-gray-500" to={"/register"}>
+      <FloatingShape
+        color="bg-emerald-500"
+        size="w-48 h-48"
+        top="70%"
+        left="80%"
+        delay={5}
+      />
+      <FloatingShape
+        color="bg-lime-500"
+        size="w-32 h-32"
+        top="40%"
+        left="-10%"
+        delay={2}
+      />
+
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+        className="max-w-md w-full bg-gray-500 bg-opacity-50 backdrop-filter backdrop-blur-xl rounded-2xl shadow-xl overflow-hidden"
+      >
+        <div className="p-8">
+          <h2 className="text-3xl font-bold mb-6 text-center bg-gradient-to-r from-green-400 to-emerald-500 text-transparent bg-clip-text">
+            Welcome Back
+          </h2>
+
+          <form onSubmit={handleLogin}>
+            <Input
+              icon={Mail}
+              type="email"
+              placeholder="Email Address"
+              value={formData.email}
+              onChange={(e) =>
+                setFormData({ ...formData, email: e.target.value })
+              }
+            />
+            <Input
+              icon={Lock}
+              type="password"
+              placeholder="Password"
+              value={formData.password}
+              onChange={(e) =>
+                setFormData({ ...formData, password: e.target.value })
+              }
+            />
+
+            <div className="flex items-center mb-6">
+              <Link
+                to="/forgot-password"
+                className="text-sm text-green-400 hover:underline"
+              >
+                Forgot password?
+              </Link>
+            </div>
+
+            <motion.button
+              className="mt-5 w-full py-3 px-4 bg-gradient-to-r from-green-500 to-emerald-600 text-white font-bold rounded-lg shadow-lg hover:from-green-600 hover:to-emerald-700 focus:ring-2 focus:ring-green-500 focus:ring-offset-2 focus:ring-offset-gray-900 transition duration-200"
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              type="submit"
+              disabled={isLoading}
+            >
+              {isLoading ? (
+                <Loader className="animate-spin mx-auto" size={24} />
+              ) : (
+                "Login"
+              )}
+            </motion.button>
+          </form>
+        </div>
+        <div className="px-8 py-4 bg-gray-900 bg-opacity-50 flex justify-center">
+          <p className="text-sm text-gray-400">
+            Don't have an account?{" "}
+            <Link to={"/register"} className="text-green-400 hover:underline">
               Register here
             </Link>
           </p>
-        </form>
-      </div> */}
-
-      <main className="flex items-center justify-center min-h-screen bg-gray-100">
-        <section className="relative flex flex-col m-6 space-y-8 bg-white shadow-2xl rounded-2xl md:flex-row md:space-y-0">
-          {/* ** Login Section ** */}
-          <div className="flex flex-col justify-center p-8 md:p-16">
-            <h1 class="mb-3 text-center text-2xl md:text-3xl font-normal text-green-900">
-              Welcome back
-            </h1>
-            <p class="font-light text-gray-400 mb-8">
-              Please enter your details to continue
-            </p>
-
-            <form className="space-y-6">
-              <Input
-                onChange={(e) =>
-                  setUserFormData({ ...userFormData, email: e.target.value })
-                }
-                placeholder="Enter your email"
-                size="large"
-                class="w-full p-2 border border-gray-300 rounded-md placeholder:font-light placeholder:text-gray-500 outline-none"
-              />
-
-              <Input.Password
-                onChange={(e) =>
-                  setUserFormData({
-                    ...userFormData,
-                    password: e.target.value,
-                  })
-                }
-                placeholder="Password"
-                size="large"
-                class="w-full placeholder:font-light placeholder:text-gray-500 outline-none"
-              />
-
-              <div class="flex justify-between items-center w-full py-4">
-                <div class="flex items-center">
-                  <input type="checkbox" class="mr-2" />
-                  <label for="remember" class="text-[0.8rem]">
-                    Remember me
-                  </label>
-                </div>
-                <a href="#" class="font-bold text-[0.8rem]">
-                  Forgot Password?
-                </a>
-              </div>
-
-              <Button
-                onClick={handleUserLogin}
-                loading={isLoading}
-                type="primary"
-                variant="solid"
-                size="large"
-                block
-              >
-                Login
-              </Button>
-
-              <button class="w-full border border-gray-300 text-md p-2 outline-none rounded-lg mb-6 hover:bg-black hover:text-white hover:border-transparent transition-background duration-300 ease-linear">
-                <img
-                  src="/images/google-color-icon.svg"
-                  alt="google"
-                  class="w-6 h-6 inline mr-2"
-                />
-                Sign in with Google
-              </button>
-
-              <p>
-                Don't have an account yet?{" "}
-                <Link className="font-semibold text-gray-500" to={"/register"}>
-                  Register here
-                </Link>
-              </p>
-            </form>
-          </div>
-
-          {/* Image with Text Overlay */}
-          <div class="relative">
-            <img
-              src="/images/organic-01.jpg"
-              class="w-[400px] h-full hidden rounded-r-2xl md:block object-cover opacity-80"
-              alt="Login background"
-            />
-            <div class="absolute hidden bottom-10 right-6 p-6 bg-black bg-opacity-40 backdrop-blur-sm rounded drop-shadow-lg md:block">
-              <p class="text-gray-300 text-xl text-center font-normal shadow-lg">
-                "Experience the freshest organic produce, grown with care and
-                delivered with love at Farmgry.
-              </p>
-            </div>
-          </div>
-        </section>
-      </main>
-    </>
+        </div>
+      </motion.div>
+    </div>
   );
 };
 

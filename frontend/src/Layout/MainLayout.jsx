@@ -8,10 +8,12 @@ function MainLayout() {
     <div>
       {!location.pathname.includes("admin") &&
         !location.pathname.includes("login") &&
-        !location.pathname.includes("register") && <Announcement />}
+        !location.pathname.includes("register") &&
+        !location.pathname.includes("verify-email") && <Announcement />}
       {!location.pathname.includes("admin") &&
         !location.pathname.includes("login") &&
-        !location.pathname.includes("register") && <Navbar />}
+        !location.pathname.includes("register") &&
+        !location.pathname.includes("verify-email") && <Navbar />}
       <Outlet />
     </div>
   );

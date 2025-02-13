@@ -1,7 +1,5 @@
-import { ShoppingCart } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useNavigate } from "react-router";
-import { updateUser } from "../../features/user/userSlice";
 import Filter from "./Filter";
 import {
   UserOutlined,
@@ -11,18 +9,17 @@ import {
   ShoppingOutlined,
   ShopOutlined,
   DashboardOutlined,
-  BoxPlotOutlined,
   CarryOutOutlined,
 } from "@ant-design/icons";
-import { Avatar, Space, Dropdown } from "antd";
-import { FaBox } from "react-icons/fa";
+import { motion } from "framer-motion";
+import { Space, Dropdown } from "antd";
+import { logoutUser } from "../../features/auth/authSlice";
 
 function Navbar() {
   const { cartItems } = useSelector((state) => state.cart);
-  const { user } = useSelector((state) => state.user);
+  const { user } = useSelector((state) => state.auth);
 
-  // const [searchValue, setSearchValue] = useState('');
-  // const [selectedFilter, setSelectedFilter] = useState('all');
+  // console.log(user);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -38,7 +35,7 @@ function Navbar() {
 
   function handleUserLogout() {
     localStorage.removeItem("user");
-    dispatch(updateUser(null));
+    dispatch(logoutUser());
     navigate("/");
   }
 
@@ -46,11 +43,15 @@ function Navbar() {
   const dropDownItems1 = [
     {
       label: (
-        <NavLink
-          to="/login"
-          className="block w-full text-center font-semibold rounded-md shadow-md bg-orange-400 !text-white text-lg py-2 px-4 my-2"
-        >
-          Login
+        <NavLink to="/login">
+          <motion.button
+            className="mt-5 w-full py-3 px-4 bg-gradient-to-r from-green-500 to-emerald-600 text-white font-bold rounded-lg shadow-lg hover:from-green-600 hover:to-emerald-700 focus:ring-2 focus:ring-green-500 focus:ring-offset-2 focus:ring-offset-gray-900 transition duration-200"
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+            type="submit"
+          >
+            Login
+          </motion.button>
         </NavLink>
       ),
       key: "0",
@@ -104,7 +105,11 @@ function Navbar() {
     {
       label: (
         <NavLink
-          to={user && user.userType === "admin" ? "/admin/orders" : "/profile/orders"}
+          to={
+            user && user.userType === "admin"
+              ? "/admin/orders"
+              : "/profile/orders"
+          }
         >
           <Space className="text-[1rem]">
             <ShoppingOutlined className="text-2xl" /> <span>Orders</span>
@@ -114,8 +119,8 @@ function Navbar() {
       key: "3",
     },
     {
-      label: user &&
-        user.userType === "admin" ? (
+      label:
+        user && user.userType === "admin" ? (
           <NavLink to={"/admin/products"}>
             <Space className="text-[1rem]">
               <CarryOutOutlined className="text-2xl" /> <span>Products</span>
@@ -151,7 +156,7 @@ function Navbar() {
       <section className="container mx-auto flex flex-col md:flex-row items-center justify-between gap-4 p-4">
         {/* Logo */}
         <NavLink to={"/"}>
-          <h1 className="font-bold text-2xl text-green-800 font-sans">
+          <h1 className="text-3xl font-bold mb-6 text-center bg-gradient-to-r from-green-500 to-emerald-800 text-transparent bg-clip-text">
             Farmgry
           </h1>
         </NavLink>
@@ -161,7 +166,10 @@ function Navbar() {
 
         {/* Navbar Links */}
         <div className="flex gap-4 text-gray-900 font-medium items-center text-lg">
-          <NavLink className={"hover:text-orange-500"} to={"/products"}>
+          <NavLink
+            className={"hover:text-orange-500 transition-colors duration-500 "}
+            to={"/products"}
+          >
             <Space>
               <ShopOutlined className="text-2xl" />
               <span>Marketplace</span>
@@ -170,7 +178,7 @@ function Navbar() {
 
           <Dropdown
             menu={{
-              items: user === null ? dropDownItems1 : dropDownItems2,
+              items: user ? dropDownItems2 : dropDownItems1,
             }}
             trigger={["click"]}
             size="large"
@@ -178,22 +186,23 @@ function Navbar() {
           >
             <a
               onClick={(e) => e.preventDefault()}
-              className="cursor-pointer p-2 rounded-md hover:text-orange-500"
+              className="cursor-pointer p-2 rounded-md hover:text-orange-500 transition-colors duration-500"
             >
               <Space>
                 <UserOutlined className="text-2xl" />
-                {user === null ? (
-                  <span>Account</span>
-                ) : (
-                  <span className="capitalize">Hi, {user.name}</span>
-                )}
+                <span className="capitalize">
+                  {user ? `Hi ${user.name}` : "Account"}
+                </span>
                 <DownOutlined className="text-sm" />
               </Space>
             </a>
           </Dropdown>
 
-          {user !== null && user.userType === "admin" ? (
-            <NavLink to={"/admin"} className="hover:text-orange-500">
+          {user && user.userType === "admin" ? (
+            <NavLink
+              to={"/admin"}
+              className="hover:text-orange-500 transition-colors duration-500 "
+            >
               <Space>
                 <DashboardOutlined className="text-2xl" />
                 <span>Admin</span>
@@ -210,7 +219,7 @@ function Navbar() {
               <Space size={8}>
                 <ShoppingCartOutlined className="text-3xl" />
               </Space>
-              <p className="bg-orange-500 absolute -top-1 left-6  px-1 text-white rounded-lg text-center text-xs">
+              <p className="bg-emerald-500 absolute -top-1 left-6  px-1 text-white rounded-lg text-center text-xs">
                 {cartItems.length}
               </p>
               <span className="text-lg">Cart</span>

@@ -15,12 +15,13 @@ const app = express();
 
 app.use(
   cors({
-    origins: [
+    origin: [
       "https://ecomdemo-eight.vercel.app/",
       "https://ecomdemo-eight.vercel.app",
       "http://localhost:5173/",
       "http://localhost:5173",
     ],
+    credentials: true
   })
 );
 app.use(express.json());  // allows us to parse incoming requests:req.body

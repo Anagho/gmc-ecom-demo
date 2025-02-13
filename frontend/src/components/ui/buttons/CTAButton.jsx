@@ -1,9 +1,15 @@
+import { motion } from "framer-motion";
 
 function CTAButton({ buttonText }) {
   return (
-    <button className="bg-orange-400 text-white font-medium text-sm sm:text-lg hover:bg-orange-500 rounded-md shadow-lg px-2 py-2 duration-300">
-     {buttonText}
-    </button>
+    <motion.button
+      className="mt-5 py-3 px-4 bg-gradient-to-r from-green-500 to-emerald-600 text-white font-bold rounded-lg shadow-lg hover:from-green-600 hover:to-emerald-700 focus:ring-2 focus:ring-green-500 focus:ring-offset-2 focus:ring-offset-gray-900 transition duration-200"
+      whileHover={{ scale: 1.02 }}
+      whileTap={{ scale: 0.98 }}
+      type="submit"
+    >
+      {buttonText}
+    </motion.button>
   );
 }
 
