@@ -17,6 +17,11 @@ export const authSlice = createSlice({
       state.isLoading = action.payload;
     },
 
+    // *** SET ERROR ACTION
+    setError: (state, action) => {
+      state.error = action.payload;
+    },
+
     // *** REGISTER USER ACTION
     registerUser: (state, action) => {
       state.user = action.payload;
@@ -31,17 +36,36 @@ export const authSlice = createSlice({
       state.isAuthenticated = true;
       state.error = null;
       state.isLoading = false;
-
       // Store user in localStorage
       localStorage.setItem("user", JSON.stringify(action.payload));
     },
 
     // *** VERIFY EMAIL ACTION
     verifyEmail: (state, action) => {
-      state.user = action.payload;
-      state.isAuthenticated = true;
+      if (action.payload) {
+        state.user = action.payload;
+      } else {
+        state.user = null;
+      }
+
+      state.isAuthenticated = false;
       state.error = null;
       state.isLoading = false;
+    },
+
+    // *** CHECK AUTH ACTION
+    checkAuth: (state, action) => {
+      if (action.payload) {
+        state.user = action.payload;
+        state.isAuthenticated = true;
+
+        localStorage.setItem("user", JSON.stringify(action.payload));
+      } else {
+        state.user = null;
+        state.isAuthenticated = false;
+        localStorage.removeItem("user");
+      }
+      state.isCheckingAuth = false;
     },
 
     // *** LOGOUT USER ACTION
@@ -53,6 +77,14 @@ export const authSlice = createSlice({
   },
 });
 
-export const { loginUser, registerUser, verifyEmail, logoutUser, setLoading } = authSlice.actions;
+export const {
+  loginUser,
+  registerUser,
+  verifyEmail,
+  checkAuth,
+  logoutUser,
+  setLoading,
+  setError,
+} = authSlice.actions;
 
 export default authSlice.reducer;

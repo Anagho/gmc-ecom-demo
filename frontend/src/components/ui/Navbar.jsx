@@ -14,6 +14,9 @@ import {
 import { motion } from "framer-motion";
 import { Space, Dropdown } from "antd";
 import { logoutUser } from "../../features/auth/authSlice";
+import axios from "axios";
+import { serverUrl } from "../../utils/helper";
+import toast from "react-hot-toast";
 
 function Navbar() {
   const { cartItems } = useSelector((state) => state.cart);
@@ -33,10 +36,15 @@ function Navbar() {
     { label: "Grains", value: "grains" },
   ];
 
-  function handleUserLogout() {
-    localStorage.removeItem("user");
+  async function handleUserLogout() {
+    const response = await axios.post(
+      `${serverUrl}/auth/logout`,
+      {},
+      { withCredentials: true }
+    );
     dispatch(logoutUser());
     navigate("/");
+    toast.success(response.data.message);
   }
 
   // Dropdown Menu

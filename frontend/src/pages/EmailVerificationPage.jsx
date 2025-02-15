@@ -72,20 +72,27 @@ const EmailVerificationPage = () => {
       );
 
       console.log(response);
+
+      const user = response.data.user;
+
       // Ensure it was successful
-      navigate("/login");
-      dispatch(setLoading(false));
+      if (response.data.success === true) {
+        dispatch(verifyEmail(user));
+        navigate("/login");
+        dispatch(setLoading(false));
+      }
+
       toast.success("Email verified successfully");
       setTimeout(() => {
-        toast.success("Enter your details to login")
-      }, 5000);
+        toast.success("Enter your details to login");
+      }, 3000);
     } catch (error) {
       console.log(error);
-      dispatch(setLoading(false))
+      dispatch(setLoading(false));
       toast.error(error.response.data.message);
       setTimeout(() => {
         setCode(["", "", "", "", ""]);
-      },3000);
+      }, 3000);
     }
   };
 
@@ -150,9 +157,7 @@ const EmailVerificationPage = () => {
                 />
               ))}
             </div>
-            {error && (
-              <p className="text-red-500 font-semibold mt-2">{error}</p>
-            )}
+          
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
