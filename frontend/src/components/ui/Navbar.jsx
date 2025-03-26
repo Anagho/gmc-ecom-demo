@@ -188,10 +188,10 @@ function Navbar() {
             </div>
 
             {/* right */}
-            <div className="flex items-center gap-5">
+            <div className="flex items-center gap-4">
               {/* User */}
               <Space>
-                <UserOutlined className="text-3xl" />
+                <UserOutlined className="text-2xl" />
               </Space>
 
               {/* Cart */}
@@ -202,7 +202,7 @@ function Navbar() {
                 to={"/cart"}
               >
                 <Space>
-                  <ShoppingCartOutlined className="text-4xl" />
+                  <ShoppingCartOutlined className="text-3xl" />
                 </Space>
                 <span className="bg-emerald-500 absolute -top-1 left-6 px-1 text-white rounded-lg text-center text-sm">
                   {cartItems.length}
