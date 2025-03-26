@@ -13,13 +13,13 @@ import {
   SearchOutlined,
 } from "@ant-design/icons";
 import { motion } from "framer-motion";
-import { Space, Dropdown } from "antd";
+import { Space, Dropdown, Avatar } from "antd";
 import { logoutUser } from "../../features/auth/authSlice";
 import axios from "axios";
 import { serverUrl } from "../../utils/helper";
 import toast from "react-hot-toast";
 import { useState } from "react";
-import { MenuIcon } from "lucide-react";
+import { MenuIcon, ShoppingBagIcon, User2Icon, UserCheck2Icon, UserRoundCheck } from "lucide-react";
 import MobileSidebar from "./MobileSidebar";
 
 function Navbar() {
@@ -190,9 +190,9 @@ function Navbar() {
             {/* right */}
             <div className="flex items-center gap-4">
               {/* User */}
-              <Space>
-                <UserOutlined className="text-xl" />
-              </Space>
+              {user && <Space>
+                <Avatar>{user.name[0]}</Avatar></Space>}
+              <Space>{user ? <UserCheck2Icon /> : <User2Icon />}</Space>
 
               {/* Cart */}
               <NavLink
@@ -202,7 +202,7 @@ function Navbar() {
                 to={"/cart"}
               >
                 <Space>
-                  <ShoppingCartOutlined className="text-2xl" />
+                  <ShoppingBagIcon />
                 </Space>
                 <span className="bg-emerald-500 absolute -top-1 left-4 px-1 text-white rounded-full text-center text-xs">
                   {cartItems.length}
