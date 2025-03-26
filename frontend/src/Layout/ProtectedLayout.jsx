@@ -12,22 +12,15 @@ const ProtectedLayout = () => {
   const location = useLocation();
   const dispatch = useDispatch();
 
-  // Recheck authentication on route changes
-  useEffect(() => {
-    dispatch(checkAuth());
-  }, [dispatch, location]);
-
   // Show a loading spinner while checking authentication
   if (isCheckingAuth) {
     return <Spin />;
  
   }
-  if (user && !user.isVerified) return <Navigate to="/verify-email" replace />
+  if (!isAuthenticated ) return <Navigate to={"/"} />
 
   // Redirect to login if the user is not authenticated
-  if (!user && !isAuthenticated) {
-    return <Navigate to="/login" state={{ from: location }} replace />;
-  }
+  
 
   return <Outlet />;
 };

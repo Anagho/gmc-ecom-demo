@@ -5,9 +5,17 @@ import {
   FaCalendarAlt,
 } from "react-icons/fa";
 import { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { logoutUser } from "../../features/auth/authSlice";
+import { serverUrl } from "../../utils/helper";
+import axios from "axios";
+import { useNavigate } from "react-router";
+import toast from "react-hot-toast";
 
 const AdminNavbar = () => {
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
+
   const { user } = useSelector((state) => state.auth);
   const [time, setTime] = useState(new Date());
 
@@ -26,6 +34,17 @@ const AdminNavbar = () => {
     month: "long",
     day: "numeric",
   });
+
+    async function handleUserLogout() {
+      const response = await axios.post(
+        `${serverUrl}/auth/logout`,
+        {},
+        { withCredentials: true }
+      );
+      dispatch(logoutUser());
+      navigate("/");
+      toast.success(response.data.message);
+    }
 
   return (
     <nav className="bg-gray-200 shadow-md p-2 px-4 flex justify-between items-center">
@@ -50,7 +69,7 @@ const AdminNavbar = () => {
         </div>
 
         {/* Logout Button */}
-        <button className="flex items-center gap-2 bg-red-600 text-white px-4 py-2 rounded-md">
+        <button onClick={handleUserLogout} className="flex items-center gap-2 bg-red-600 text-white px-4 py-2 rounded-md">
           <FaSignOutAlt />
           Logout
         </button>

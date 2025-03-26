@@ -4,7 +4,8 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: ["Public Sans", "serif"],
+        sans: ["Poppins", "sans-serif"],
+        lora: ["Lora", "serif"],
       },
     },
   },

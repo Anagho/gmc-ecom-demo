@@ -58,7 +58,7 @@ const Filter = ({ productOptions, searchValue, selectedFilter }) => {
   }
 
   return (
-    <div className="flex flex-1 items-center max-w-lg border rounded-lg bg-gray-100 shadow-sm overflow-hidden">
+    <div className="flex items-center mx-auto w-full md:w-1/2 border rounded-lg bg-gray-100 shadow-sm overflow-hidden">
       {/* Filter Container */}
       <div className="relative">
         <select
@@ -66,11 +66,11 @@ const Filter = ({ productOptions, searchValue, selectedFilter }) => {
           id=""
           value={selectedFilter}
           onChange={(e) => handleProductFilter(e.target.value)}
-          className="bg-gray-100 border-none outline-none cursor-pointer px-3"
+          className="bg-gray-100 text-sm border-none outline-none cursor-pointer px-3"
         >
           {productOptions.map((option) => (
             <option
-              className="absolute"
+              className="absolute text-sm"
               key={option.value}
               value={option.value}
             >
@@ -86,7 +86,7 @@ const Filter = ({ productOptions, searchValue, selectedFilter }) => {
         value={searchValue}
         onChange={(e) => handleProductSearch(e.target.value)}
         placeholder="What are you shopping for?"
-        className="px-2 py-3 font-light text-lg border-none outline-none bg-gray-100 placeholder-gray-500 w-full flex-1"
+        className="flex-1 p-2 font-light text-[1rem] border-none outline-none bg-gray-100 placeholder-gray-500"
       />
 
       {/* Search Icon Container */}
@@ -95,7 +95,7 @@ const Filter = ({ productOptions, searchValue, selectedFilter }) => {
           onClick={handleProductSearch}
           className="p-3 hover:bg-gray-200 active:bg-gray-300 transition-all"
         >
-          <SearchOutlined className="text-xl text-gray-600" />
+          <SearchOutlined className="text-lg text-gray-600" />
         </button>
       </div>
     </div>

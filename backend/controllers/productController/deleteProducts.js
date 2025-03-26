@@ -5,8 +5,9 @@ const deleteProduct = async (req, res) => {
     const product = await ProductModel.findOneAndDelete({
       _id: req.params.id,
     });
+
     if (product) {
-      res.json({ message: "product deleted successfully" });
+      res.json({ message: "product deleted successfully", status: "success" });
       console.log("Product deleted");
     } else {
       res.status(404).json({ message: "Product not found" });

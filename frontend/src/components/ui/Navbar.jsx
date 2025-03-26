@@ -10,6 +10,7 @@ import {
   ShopOutlined,
   DashboardOutlined,
   CarryOutOutlined,
+  SearchOutlined,
 } from "@ant-design/icons";
 import { motion } from "framer-motion";
 import { Space, Dropdown } from "antd";
@@ -17,6 +18,9 @@ import { logoutUser } from "../../features/auth/authSlice";
 import axios from "axios";
 import { serverUrl } from "../../utils/helper";
 import toast from "react-hot-toast";
+import { useState } from "react";
+import { MenuIcon } from "lucide-react";
+import MobileSidebar from "./MobileSidebar";
 
 function Navbar() {
   const { cartItems } = useSelector((state) => state.cart);
@@ -69,7 +73,7 @@ function Navbar() {
     },
     {
       label: (
-        <NavLink to="/login">
+        <NavLink to={user ? "/profile" : "/login"}>
           <Space className="text-[1rem]">
             <UserOutlined className="text-2xl" /> <span>My Account</span>
           </Space>
@@ -79,7 +83,7 @@ function Navbar() {
     },
     {
       label: (
-        <NavLink to="/login">
+        <NavLink to={user ? "/profile/orders" : "/login"}>
           <Space className="text-[1rem]">
             <ShoppingOutlined className="text-2xl" /> <span>Orders</span>
           </Space>
@@ -89,7 +93,7 @@ function Navbar() {
     },
     {
       label: (
-        <NavLink to="/login">
+        <NavLink to={user ? "/profile/wishlist" : "/login"}>
           <Space className="text-[1rem]">
             <HeartOutlined className="text-2xl" /> <span>Wishlist</span>
           </Space>
@@ -159,80 +163,66 @@ function Navbar() {
     },
   ];
 
+  // Sidebar State
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
   return (
     <nav className="shadow-md bg-white sticky top-0 z-[999]">
-      <section className="container mx-auto flex flex-col md:flex-row items-center justify-between gap-4 p-4">
-        {/* Logo */}
-        <NavLink to={"/"}>
-          <h1 className="text-3xl font-bold mb-6 text-center bg-gradient-to-r from-green-500 to-emerald-800 text-transparent bg-clip-text">
-            Farmgry
-          </h1>
-        </NavLink>
+      <section className="container mx-auto flex p-4">
+        {/* Only show in small screens */}
+        <div className="md:hidden w-full">
+          <div className="flex items-center justify-between">
+            {/* left */}
+            <div className="flex items-center gap-4">
+              {/* Menu */}
+              <button>
+                <MenuIcon size={30} />
+              </button>
 
-        {/* Filter and Search Bar */}
-        <Filter productOptions={productOptions} />
+              {/* Logo */}
+              <NavLink to={"/"}>
+                <h2 className="font-bold font-lora text-3xl text-center bg-gradient-to-r from-green-700 to-emerald-800 text-transparent bg-clip-text">
+                  Farmgry🌿
+                </h2>
+              </NavLink>
+            </div>
 
-        {/* Navbar Links */}
-        <div className="flex gap-4 text-gray-900 font-medium items-center text-lg">
-          <NavLink
-            className={"hover:text-orange-500 transition-colors duration-500 "}
-            to={"/products"}
-          >
-            <Space>
-              <ShopOutlined className="text-2xl" />
-              <span>Marketplace</span>
-            </Space>
-          </NavLink>
-
-          <Dropdown
-            menu={{
-              items: user ? dropDownItems2 : dropDownItems1,
-            }}
-            trigger={["click"]}
-            size="large"
-            className="w-full"
-          >
-            <a
-              onClick={(e) => e.preventDefault()}
-              className="cursor-pointer p-2 rounded-md hover:text-orange-500 transition-colors duration-500"
-            >
+            {/* right */}
+            <div className="flex items-center gap-5">
+              {/* User */}
               <Space>
-                <UserOutlined className="text-2xl" />
-                <span className="capitalize">
-                  {user ? `Hi ${user.name}` : "Account"}
+                <UserOutlined className="text-3xl" />
+              </Space>
+
+              {/* Cart */}
+              <NavLink
+                className={
+                  "hover:text-orange-500 relative transition-colors duration-500 flex items-center gap-3"
+                }
+                to={"/cart"}
+              >
+                <Space>
+                  <ShoppingCartOutlined className="text-4xl" />
+                </Space>
+                <span className="bg-emerald-500 absolute -top-1 left-6 px-1 text-white rounded-lg text-center text-sm">
+                  {cartItems.length}
                 </span>
-                <DownOutlined className="text-sm" />
-              </Space>
-            </a>
-          </Dropdown>
+              </NavLink>
+            </div>
+          </div>
 
-          {user && user.userType === "admin" ? (
-            <NavLink
-              to={"/admin"}
-              className="hover:text-orange-500 transition-colors duration-500 "
-            >
-              <Space>
-                <DashboardOutlined className="text-2xl" />
-                <span>Admin</span>
-              </Space>
-            </NavLink>
-          ) : (
-            <NavLink
-              className={
-                "hover:text-orange-500 relative transition-colors duration-500 flex items-center gap-4"
-              }
-              to={"/cart"}
-            >
-              {/* <ShoppingCart strokeWidth={2.5} /> */}
-              <Space size={8}>
-                <ShoppingCartOutlined className="text-3xl" />
-              </Space>
-              <p className="bg-emerald-500 absolute -top-1 left-6  px-1 text-white rounded-lg text-center text-xs">
-                {cartItems.length}
-              </p>
-              <span className="text-lg">Cart</span>
-            </NavLink>
-          )}
+          {/* Search Bar */}
+          <div className="w-full mt-4">
+            {/* Search Input */}
+            <div className="flex items-center border border-gray-300 rounded-full px-3 py-2">
+              <SearchOutlined className="text-xl" />
+              <input
+                type="text"
+                placeholder="Search products, farms and categories"
+                className="pl-2 outline-none border-none w-full"
+              />
+            </div>
+          </div>
         </div>
       </section>
     </nav>

@@ -61,8 +61,10 @@ const Register = () => {
         }
       );
 
+      console.log(response);
+
       const user = response.data.user;
-      console.log(response.data)
+      // console.log(response.data)
       if (response.data.status === "success") {
         dispatch(registerUser(user));
         toast.success("Verification sent to your email")

@@ -1,4 +1,10 @@
-import { Navigate, Route, Routes } from "react-router";
+import {
+  Navigate,
+  Route,
+  Routes,
+  useLocation,
+  useNavigate,
+} from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { Spin } from "antd";
 
@@ -12,7 +18,7 @@ import Admin from "./pages/protected/Admin";
 import OrderDetails from "./components/admin/orders/OrderDetails";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
-import UserProfile from "./pages/UserProfile";
+import UserProfile from "./components/userDashboard/UserProfile";
 import ProtectedLayout from "./Layout/ProtectedLayout";
 import ProtectedAdminLayout from "./Layout/ProtectedAdminLayout";
 import AddProductPage from "./pages/protected/AddProductPage";
@@ -27,12 +33,33 @@ import { checkAuth, setError } from "./features/auth/authSlice";
 import { useEffect } from "react";
 import axios from "axios";
 import { serverUrl } from "./utils/helper";
+import LoadingSpinner from "./components/ui/LoadingSpinner";
+import UserDashboardLayout from "./Layout/UserDashboardLayout";
+import UserDashboardPage from "./pages/userDashboard/UserDashboardPage";
 
 // Redirect authenticated users to the homepage
-const RedirectAuthenticatedUser = ({ children, message }) => {
+export const RedirectAuthenticatedUser = ({ children, message }) => {
   const { isCheckingAuth, isAuthenticated, user } = useSelector(
     (state) => state.auth
   );
+
+  const navigate = useNavigate();
+
+  const location = useLocation();
+
+  console.log(location);
+
+  useEffect(() => {
+    if (isAuthenticated && user) {
+      if (location.pathname === "/login" || location.pathname === "/register") {
+        navigate("/");
+        toast.success(message);
+      } else if (location.pathname === "/verify-email" && user.isVerified) {
+        navigate("/");
+        toast.success(message);
+      }
+    }
+  }, [isAuthenticated, user, location.pathname, navigate, message]);
 
   if (isCheckingAuth) {
     return (
@@ -40,12 +67,7 @@ const RedirectAuthenticatedUser = ({ children, message }) => {
         size="large"
         className="h-screen flex justify-center items-center"
       />
-    ); // Show a spinner while checking auth
-  }
-
-  if (isAuthenticated && user?.isVerified) {
-    toast.success(message);
-    return <Navigate to="/" replace />;
+    );
   }
 
   return children;
@@ -85,6 +107,8 @@ function App() {
 
     handleCheckAuth();
   }, [dispatch]);
+
+  if (isCheckingAuth) return <LoadingSpinner />;
 
   return (
     <>
@@ -138,7 +162,9 @@ function App() {
               <Route path="orders" element={<OrdersPage />} />
               <Route path="users" element={<UsersPage />} />
             </Route>
-            <Route path="profile" element={<UserProfile />} />
+            <Route path="profile" element={<UserDashboardLayout />}>
+              <Route index element={<UserDashboardPage />} />
+            </Route>
           </Route>
 
           {/* 404 Page */}

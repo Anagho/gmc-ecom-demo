@@ -71,7 +71,7 @@ const HeroSlider = () => {
         {/* Slide 1 */}
         <SwiperSlide>
           <div
-            className="flex items-center justify-center w-full h-[70vh] bg-cover bg-center relative"
+            className="flex items-center justify-center w-full h-[70vh] bg-cover bg-center relative z-[]"
             style={{ backgroundImage: "url('/images/slider-home-01.jpg')" }}
           >
             <section className="container mx-auto">
