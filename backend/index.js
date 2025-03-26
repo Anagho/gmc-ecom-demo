@@ -7,12 +7,14 @@ import orderRoutes from "./routes/ordersRoutes.js";
 import authRoutes from "./routes/authRoutes.js";
 import productRoutes from "./routes/productsRoutes.js";
 import userRoutes from "./routes/usersRoute.js";
+import job from "./lib/cron.js"
 
 import { connectToDatabase } from "./config/mongodbConnection.js";
 
 const PORT = 3000;
 const app = express();
 
+job.start();
 app.use(
   cors({
     origin: [
