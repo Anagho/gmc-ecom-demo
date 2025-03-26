@@ -176,12 +176,12 @@ function Navbar() {
             <div className="flex items-center gap-4">
               {/* Menu */}
               <button>
-                <MenuIcon size={26} />
+                <MenuIcon size={24} />
               </button>
 
               {/* Logo */}
               <NavLink to={"/"}>
-                <h2 className="font-bold font-lora text-2xl text-center bg-gradient-to-r from-green-700 to-emerald-800 text-transparent bg-clip-text">
+                <h2 className="font-extrabold font-lora text-2xl text-center bg-gradient-to-r from-green-700 to-emerald-800 text-transparent bg-clip-text">
                   Farmgry🌿
                 </h2>
               </NavLink>
@@ -191,7 +191,7 @@ function Navbar() {
             <div className="flex items-center gap-4">
               {/* User */}
               <Space>
-                <UserOutlined className="text-2xl" />
+                <UserOutlined className="text-xl" />
               </Space>
 
               {/* Cart */}
@@ -202,9 +202,9 @@ function Navbar() {
                 to={"/cart"}
               >
                 <Space>
-                  <ShoppingCartOutlined className="text-3xl" />
+                  <ShoppingCartOutlined className="text-2xl" />
                 </Space>
-                <span className="bg-emerald-500 absolute -top-1 left-6 px-1 text-white rounded-full text-center text-xs">
+                <span className="bg-emerald-500 absolute -top-1 left-4 px-1 text-white rounded-full text-center text-xs">
                   {cartItems.length}
                 </span>
               </NavLink>
@@ -214,12 +214,12 @@ function Navbar() {
           {/* Search Bar */}
           <div className="w-full mt-4">
             {/* Search Input */}
-            <div className="flex items-center border border-gray-300 rounded-full px-2 py-1">
-              <SearchOutlined className="text-xl text-gray-500 p-1 rounded-full" />
+            <div className="flex items-center border border-gray-600 rounded-full px-2 py-1">
+              <SearchOutlined className="text-lg text-gray-500 mr-2 rounded-full" />
               <input
                 type="text"
                 placeholder="Search products, farms, categories..."
-                className="outline-none border-none w-full"
+                className="outline-none border-none w-full text-sm"
               />
             </div>
           </div>
