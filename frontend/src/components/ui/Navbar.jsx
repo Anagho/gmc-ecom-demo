@@ -191,7 +191,7 @@ function Navbar() {
             <div className="flex items-center gap-4">
               {/* User */}
               {user && <Space>
-                <Avatar>{user.name[0]}</Avatar></Space>}
+                <Avatar className="bg-green-200 text-emerald-900 font-semibold text-sm">{user.name[0]}</Avatar></Space>}
               <Space>{user ? <UserCheck2Icon /> : <User2Icon />}</Space>
 
               {/* Cart */}
