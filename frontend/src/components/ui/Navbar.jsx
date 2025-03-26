@@ -21,6 +21,7 @@ import toast from "react-hot-toast";
 import { useState } from "react";
 import { MenuIcon, ShoppingBagIcon, User2Icon, UserCheck2Icon, UserRoundCheck } from "lucide-react";
 import MobileSidebar from "./MobileSidebar";
+import Logo from "./Logo";
 
 function Navbar() {
   const { cartItems } = useSelector((state) => state.cart);
@@ -175,16 +176,12 @@ function Navbar() {
             {/* left */}
             <div className="flex items-center gap-4">
               {/* Menu */}
-              <button>
+              <button onClick={() => setIsSidebarOpen(true)}>
                 <MenuIcon size={24} />
               </button>
 
               {/* Logo */}
-              <NavLink to={"/"}>
-                <h2 className="font-extrabold font-lora text-2xl text-center bg-gradient-to-r from-green-700 to-emerald-800 text-transparent bg-clip-text">
-                  Farmgry🌿
-                </h2>
-              </NavLink>
+              <Logo />
             </div>
 
             {/* right */}
@@ -225,6 +222,14 @@ function Navbar() {
           </div>
         </div>
       </section>
+
+      {/* Sidebar */}
+      <MobileSidebar
+        isOpen={isSidebarOpen}
+        setIsOpen={setIsSidebarOpen}
+        user={user}
+        cartItems={cartItems}
+      />
     </nav>
   );
 }
