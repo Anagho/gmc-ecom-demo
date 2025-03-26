@@ -219,7 +219,7 @@ function Navbar() {
               <input
                 type="text"
                 placeholder="Search products, farms, categories..."
-                className="outline-none border-none w-full text-sm"
+                className="outline-none border-none py-1 w-full text-sm"
               />
             </div>
           </div>
