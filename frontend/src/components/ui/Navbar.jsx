@@ -176,7 +176,7 @@ function Navbar() {
             <div className="flex items-center gap-4">
               {/* Menu */}
               <button>
-                <MenuIcon size={30} />
+                <MenuIcon size={26} />
               </button>
 
               {/* Logo */}
