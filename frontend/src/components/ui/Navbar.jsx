@@ -215,7 +215,7 @@ function Navbar() {
           <div className="w-full mt-4">
             {/* Search Input */}
             <div className="flex items-center border border-gray-300 rounded-full px-2 py-1">
-              <SearchOutlined className="text-xl text-gray-500 p-2 rounded-full" />
+              <SearchOutlined className="text-xl text-gray-500 p-1 rounded-full" />
               <input
                 type="text"
                 placeholder="Search products, farms, categories..."
