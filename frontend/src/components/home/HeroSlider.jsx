@@ -25,7 +25,7 @@ const HeroSlider = () => {
         rounded-full shadow-md hover:bg-green-600 hover:text-white transition-opacity duration-300 
         ${
           isHovered ? "opacity-100" : "opacity-10"
-        } w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 lg:w-14 lg:h-14 flex items-center justify-center`}
+        } w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 flex items-center justify-center`}
       >
         ❮
       </button>
@@ -36,7 +36,7 @@ const HeroSlider = () => {
         rounded-full shadow-md hover:bg-green-600 hover:text-white transition-opacity duration-300 
         ${
           isHovered ? "opacity-100" : "opacity-10"
-        } w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 lg:w-14 lg:h-14 flex items-center justify-center`}
+        } w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 flex items-center justify-center`}
       >
         ❯
       </button>
@@ -71,34 +71,37 @@ const HeroSlider = () => {
           {
             id: 1,
             image: "/images/slider-home-01.jpg",
-            title: "Shop Fresh Fruits & Vegetables",
+            title: "Fresh Fruits & Vegetables",
           },
           {
             id: 2,
             image: "/images/slider-home-02.jpg",
-            title: " Shop Fresh Meats & Sea Foods",
+            title: "Fresh Meats & Sea Foods",
           },
           {
             id: 3,
             image: "/images/slider-home-03.jpg",
-            title: "Shop Fresh Vegetables & Food Sales 30% Off",
+            title: "Fresh Vegetables & Food Sales 30% Off",
           },
         ].map((slide) => (
           <SwiperSlide key={slide.id}>
             <div
-              className="relative w-full h-[50vh] sm:h-[60vh] md:h-[70vh] lg:h-[80vh] bg-cover bg-center"
+              className="relative w-full h-[50vh] sm:h-[60vh] md:h-[70vh] bg-cover bg-center z-0"
               style={{ backgroundImage: `url('${slide.image}')` }}
             >
-              <div className="absolute inset-0 bg-black bg-opacity-50"></div>
+              <div className="absolute inset-0 bg-black bg-opacity-60"></div>
               <div className="flex flex-col items-center justify-center h-full text-center p-4 sm:p-6 md:p-8 lg:p-12 ">
-                <h1 className="text-white font-semibold text-xl sm:text-2xl md:text-3xl lg:text-5xl  mb-4 text-shadow z-[9999]">
-                  {slide.title}
+                <h1 className="text-white/80 font-semibold leading-6 md:leading-10 text-xl sm:text-2xl md:text-3xl lg:text-5xl  mb-4 text-shadow z-10">
+                  Shop {" "}
+                  <span className="text-green-400 px-1">{slide.title}</span>
+                  {" "}
+                  Today
                 </h1>
-                <p className="text-white text-sm sm:text-base md:text-lg lg:text-xl font-light leading-6 mb-6 text-shadow z-[9999]">
+                <p className="text-white/90 text-base md:text-lg lg:text-xl font-light leading-6 md:leading-10 mb-6 text-shadow z-10">
                   Taste the quality of organic produce delivered straight from
                   the farm to your doorstep.
                 </p>
-                <Link to="/products" className="z-[9999]">
+                <Link to="/products" className="z-10">
                   <CTAButton buttonText="Shop Now" />
                 </Link>
               </div>

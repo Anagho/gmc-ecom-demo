@@ -6,6 +6,7 @@ body {
     font-family: 'Public Sans', serif;
 }
 
+/* Hide scrollbar for Mobile*/
 .scrollable-hidden {
   overflow-y: auto; /* Enables scrolling */
   -ms-overflow-style: none; /* Hides scrollbar in IE/Edge */
@@ -14,4 +15,19 @@ body {
 
 .scrollable-hidden::-webkit-scrollbar {
   display: none; /* Hides scrollbar in Chrome, Safari */
+}
+
+/* Change Swiper Pagination Bullet Colors */
+.swiper-pagination-bullet {
+  background-color:  #15803d !important; /* Green-500 */
+  opacity: 0.6 !important;
+  width: 12px !important;
+  height: 12px !important;
+}
+
+.swiper-pagination-bullet-active {
+  background-color: #22c55e !important; /* Green-700 */
+  opacity: 1 !important;
+    width: 12px !important;
+  height: 12px !important;
 }
