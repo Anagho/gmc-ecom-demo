@@ -183,7 +183,7 @@ function MobileSidebar({ isOpen, setIsOpen, user, cartItems }) {
               {/* Tab Bar */}
               <div className="flex justify-between bg-gray-100">
                 <button
-                  className={`flex-1 flex items-center justify-center p-2 ${
+                  className={`flex-1 flex items-center justify-center p-2 text-sm ${
                     activeTab === "CATEGORY"
                       ? "bg-emerald-600 text-white"
                       : "bg-gray-200 text-gray-800"
@@ -193,7 +193,7 @@ function MobileSidebar({ isOpen, setIsOpen, user, cartItems }) {
                   <LayoutGrid size={18} className="mr-2" /> CATEGORY
                 </button>
                 <button
-                  className={`flex-1 flex items-center justify-center p-2 ${
+                  className={`flex-1 flex items-center justify-center p-2 text-sm ${
                     activeTab === "SEARCH"
                       ? "bg-emerald-600 text-white"
                       : "bg-gray-200 text-gray-800"
