@@ -20,11 +20,12 @@ import { serverUrl } from "../../utils/helper";
 import toast from "react-hot-toast";
 import { useState } from "react";
 import {
+  Heart,
   MenuIcon,
-  ShoppingBagIcon,
+  ShoppingCart,
+  Store,
   User2Icon,
   UserCheck2Icon,
-  UserRoundCheck,
 } from "lucide-react";
 import MobileSidebar from "./MobileSidebar";
 import Logo from "./Logo";
@@ -32,6 +33,7 @@ import Logo from "./Logo";
 function Navbar() {
   const { cartItems } = useSelector((state) => state.cart);
   const { user } = useSelector((state) => state.auth);
+  const { wishlistItems } = useSelector((state) => state.wishlist);
 
   // console.log(user);
 
@@ -175,9 +177,9 @@ function Navbar() {
 
   return (
     <nav className="shadow-md bg-white sticky top-0 z-[999]">
-      <section className="container mx-auto flex p-4">
-        {/* Only show in small screens */}
-        <div className="md:hidden w-full">
+      <section className="container mx-auto p-4">
+        {/* Mobile Navbar - Only show in small screens */}
+        <div className="lg:hidden w-full">
           <div className="flex items-center justify-between">
             {/* left */}
             <div className="flex items-center gap-4">
@@ -194,7 +196,7 @@ function Navbar() {
             <div className="flex items-center gap-4">
               {/* User */}
               {user && (
-                <NavLink>
+                <NavLink to="/profile" className="flex items-center gap-4">
                   <Space>
                     <Avatar className="bg-green-200 text-emerald-900 font-semibold text-sm">
                       {user.name[0]}
@@ -207,20 +209,20 @@ function Navbar() {
               )}
 
               {!user && (
-                <Space>
+                <NavLink to="/login">
                   <User2Icon />
-                </Space>
+                </NavLink>
               )}
 
               {/* Cart */}
               <NavLink
                 className={
-                  "hover:text-orange-500 relative transition-colors duration-500 flex items-center gap-3"
+                  "hover:text-emerald-500 relative transition-colors duration-500 flex items-center gap-3"
                 }
                 to={"/cart"}
               >
                 <Space>
-                  <ShoppingBagIcon />
+                  <ShoppingCart />
                 </Space>
                 <span className="bg-emerald-500 absolute -top-1 left-4 px-1 text-white rounded-full text-center text-xs">
                   {cartItems.length}
@@ -239,6 +241,113 @@ function Navbar() {
                 placeholder="Search products, farms, categories..."
                 className="outline-none border-none py-1 w-full text-sm"
               />
+            </div>
+          </div>
+        </div>
+
+        {/* Desktop Navbar */}
+        <div className="hidden lg:block w-full">
+          <div className="flex items-center justify-between">
+            {/* Left */}
+
+            <Logo />
+
+            {/* Search Bar */}
+            <div className="flex items-center justify-center gap-4 flex-grow mx-8">
+              {/* Search Input */}
+              <div className="flex items-center border border-gray-400 rounded-lg px-2 py-1 w-full max-w-[500px]">
+                <SearchOutlined className="text-lg text-gray-500 mr-2 rounded-full" />
+                <input
+                  type="text"
+                  placeholder="Search products, farms, categories..."
+                  className="outline-none border-none py-1 text-sm flex-grow w-full"
+                />
+              </div>
+              <button className="px-4 py-2 bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-lg shadow-sm">
+                Search
+              </button>
+            </div>
+
+            {/* Right */}
+            <div className="flex gap-4 text-gray-900 font-medium items-center text-[1rem]">
+              <NavLink
+                className={
+                  "hover:text-orange-500 transition-colors duration-500 "
+                }
+                to={"/products"}
+              >
+                <Space className="flex item-center">
+                  <Store size={24} />
+                  <span>Shop</span>
+                </Space>
+              </NavLink>
+
+              <Dropdown
+                menu={{
+                  items: user ? dropDownItems2 : dropDownItems1,
+                }}
+                trigger={["click"]}
+                size="large"
+                className="w-full"
+              >
+                <a
+                  onClick={(e) => e.preventDefault()}
+                  className="cursor-pointer p-2 rounded-md hover:text-orange-500 transition-colors duration-500"
+                >
+                  <Space className="flex item-center">
+                    <User2Icon size={24} />
+                    <span className="capitalize">
+                      {user ? `Hi ${user.name}` : "Account"}
+                    </span>
+                    <DownOutlined className="text-sm" />
+                  </Space>
+                </a>
+              </Dropdown>
+
+              {user && user.userType === "admin" ? (
+                <NavLink
+                  to={"/admin"}
+                  className="hover:text-orange-500 transition-colors duration-500 "
+                >
+                  <Space>
+                    <DashboardOutlined className="text-xl" />
+                    <span>Admin</span>
+                  </Space>
+                </NavLink>
+              ) : (
+                <>
+                  <NavLink
+                    className={
+                      "hover:text-orange-500 relative transition-colors duration-500 flex items-center gap-3"
+                    }
+                    to={"/cart"}
+                  >
+                    <Space>
+                      <ShoppingCart size={24} />
+                    </Space>
+                    <p className="bg-emerald-500 absolute -top-1 left-4  px-1 text-white rounded-lg text-center text-xs">
+                      {cartItems.length}
+                    </p>
+                    <span className="text-[1rem]">Cart</span>
+                  </NavLink>
+
+                  {/* Wishlist */}
+                  <NavLink
+                    className={
+                      "hover:text-orange-500 relative transition-colors duration-500 flex items-center gap-3"
+                    }
+                    to={"/cart"}
+                  >
+                    <Space>
+                      <Heart size={24} />
+                    </Space>
+                    <p className="bg-emerald-500 absolute -top-1 left-4  px-1 text-white rounded-lg text-center text-xs">
+                      {wishlistItems.length}
+                    </p>
+                    <span className="text-[1rem]">Wishlist</span>
+                  </NavLink>
+                </>
+              )}
             </div>
           </div>
         </div>
