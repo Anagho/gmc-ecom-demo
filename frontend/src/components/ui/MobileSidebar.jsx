@@ -26,7 +26,7 @@ import { useState } from "react";
 import { FaFacebookF, FaInstagram, FaLinkedinIn, FaTwitter, FaYoutube } from "react-icons/fa";
 
 const categories = [
-  { name: "Vegetables", subcategories: ["Tomatoes", "Carrots", "Spinach"] },
+  { name: "Vegetables", subcategories: ["Tomatoes", "Carrots", "Onions"] },
   { name: "Fruits", subcategories: ["Oranges", "Apples", "Bananas"] },
   { name: "Grains & Cereals", subcategories: ["Rice", "Maize", "Wheat"] },
   { name: "Dairy Products", subcategories: ["Milk", "Cheese", "Yogurt"] },
@@ -346,6 +346,7 @@ function MobileSidebar({ isOpen, setIsOpen, user, cartItems }) {
                   <FaLinkedinIn />
                 </a>
               </div>
+              <hr className="border-gray-300 my-2" />
             </div>
           </motion.div>
         </div>
