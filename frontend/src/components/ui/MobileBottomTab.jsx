@@ -13,22 +13,28 @@ const MobileBottomTab = () => {
   console.log("wishlistItems:", wishlistItems);
 
   return (
-    <div className="fixed bottom-0 left-0 w-full bg-white border-t border-gray-50 shadow-md flex justify-around py-2 z-[800] lg:hidden">
-      <TabItem icon={<Home size={24} />} label="Home" path="/" />
-      <TabItem icon={<Store size={24} />} label="Store" path="/products" />
-      <TabItem
-        icon={<Heart size={24} />}
-        label="Wishlist"
-        path="/wishlist"
-        badge={wishlistItems?.length || 0}
-      />
-      <TabItem
-        icon={<ShoppingCart size={24} />}
-        label="Cart"
-        path="/cart"
-        badge={cartItems?.length || 0}
-      />
-      <TabItem icon={<User2 size={24} />} label="Account" path={user ? "/profile" : "/login"} />
+    <div className="fixed bottom-0 left-0 w-full bg-white border-t border-gray-50 shadow-md z-[800] md:hidden">
+      <div className="flex justify-around py-2">
+        <TabItem icon={<Home size={24} />} label="Home" path="/" />
+        <TabItem icon={<Store size={24} />} label="Store" path="/products" />
+        <TabItem
+          icon={<Heart size={24} />}
+          label="Wishlist"
+          path="/wishlist"
+          badge={wishlistItems?.length || 0}
+        />
+        <TabItem
+          icon={<ShoppingCart size={24} />}
+          label="Cart"
+          path="/cart"
+          badge={cartItems?.length || 0}
+        />
+        <TabItem
+          icon={<User2 size={24} />}
+          label="Account"
+          path={user ? "/profile" : "/login"}
+        />
+      </div>
     </div>
   );
 };

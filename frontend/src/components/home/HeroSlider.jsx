@@ -92,11 +92,11 @@ const HeroSlider = () => {
         ].map((slide) => (
           <SwiperSlide key={slide.id}>
             <div
-              className="relative w-full h-[30vh] md:h-[50vh] lg:h-[70vh] bg-cover bg-center z-0"
+              className="relative w-full xs:h-[30vh] h-[30vh] sm:h-[40vh] md:h-[60vh] bg-no-repeat bg-cover bg-center z-0"
               style={{ backgroundImage: `url('${slide.image}')` }}
             >
               <div className="absolute inset-0 bg-black bg-opacity-60"></div>
-              <div className="flex flex-col items-center justify-center h-full text-center p-4 py-6 sm:p-6 md:p-8 lg:p-12 ">
+              <div className="flex flex-col items-center justify-center h-full text-center p-4 sm:p-6 md:p-8 lg:p-12 ">
                 <h1 className="text-white/80 font-semibold leading-6 md:leading-10 text-xl sm:text-2xl md:text-3xl lg:text-5xl  mb-4 text-shadow z-10">
                   {slide.preText}{" "}
                   <span className="text-green-400 px-1">{slide.title}</span>{" "}
