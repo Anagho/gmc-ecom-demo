@@ -5,3 +5,13 @@
 body {
     font-family: 'Public Sans', serif;
 }
+
+.scrollable-hidden {
+  overflow-y: auto; /* Enables scrolling */
+  -ms-overflow-style: none; /* Hides scrollbar in IE/Edge */
+  scrollbar-width: none; /* Hides scrollbar in Firefox */
+}
+
+.scrollable-hidden::-webkit-scrollbar {
+  display: none; /* Hides scrollbar in Chrome, Safari */
+}

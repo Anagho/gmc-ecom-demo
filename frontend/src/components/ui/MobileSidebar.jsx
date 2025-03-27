@@ -1,12 +1,20 @@
 import { NavLink, useNavigate } from "react-router";
 import { AnimatePresence, motion } from "framer-motion";
-import { ArrowRight, X, Grid, Clock, LayoutGrid, Search } from "lucide-react";
+import {
+  ArrowRight,
+  X,
+  LayoutGrid,
+  Search,
+  ArrowDown,
+} from "lucide-react";
 import {
   ShoppingCartOutlined,
   HeartOutlined,
   UserOutlined,
   ShopOutlined,
   LogoutOutlined,
+  FacebookFilled,
+  FacebookOutlined,
 } from "@ant-design/icons";
 import Logo from "./Logo";
 import { useDispatch } from "react-redux";
@@ -15,6 +23,7 @@ import { serverUrl } from "../../utils/helper";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { useState } from "react";
+import { FaFacebookF, FaInstagram, FaLinkedinIn, FaTwitter, FaYoutube } from "react-icons/fa";
 
 const categories = [
   { name: "Vegetables", subcategories: ["Tomatoes", "Carrots", "Spinach"] },
@@ -74,7 +83,7 @@ function MobileSidebar({ isOpen, setIsOpen, user, cartItems }) {
             animate={{ x: isOpen ? "0%" : "-100%" }}
             exit={{ x: "-100%" }}
             transition={{ duration: 0.3 }}
-            className="fixed top-0 left-0 h-full w-64 bg-white shadow-lg z-[1000] flex flex-col p-4"
+            className="fixed top-0 left-0 h-full w-64 bg-white shadow-lg z-[1000] flex flex-col p-4 scrollable-hidden"
           >
             <div className="flex items-center justify-between mb-5">
               <NavLink to="/" onClick={() => setIsOpen(false)}>
@@ -275,6 +284,68 @@ function MobileSidebar({ isOpen, setIsOpen, user, cartItems }) {
                   </div>
                 )}
               </motion.div>
+            </div>
+
+            <hr className="border-gray-300 my-4" />
+            {/* Social Media links */}
+            <div>
+              <p className="text-gray-600 flex items-center justify-between font-light mb-1">
+                <span>Follow us on</span>
+                <motion.div
+                  animate={{ y: [0, 5, 0] }} // Moves up and down
+                  transition={{
+                    repeat: Infinity,
+                    duration: 1,
+                    ease: "easeInOut",
+                  }}
+                  className="bg-gradient-to-r  from-green-500 to-emerald-600 hover:bg-gradient-to-r hover:from-green-500 hover:to-emerald-700 duration-200 text-white flex justify-center items-center rounded-full"
+                >
+                  <ArrowDown size={20} />
+                </motion.div>
+              </p>
+
+              <div className="flex justify-center gap-6 py-4 border-t border-gray-300">
+                <a
+                  href="https://facebook.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-blue-600  hover:text-blue-800 text-2xl transition duration-300"
+                >
+                  <FaFacebookF />
+                </a>
+                <a
+                  href="https://youtube.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-red-600 hover:text-red-800 text-2xl transition duration-300"
+                >
+                  <FaYoutube />
+                </a>
+                <a
+                  href="https://instagram.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-pink-500 hover:text-pink-700 text-2xl transition duration-300"
+                >
+                  <FaInstagram />
+                </a>
+                <a
+                  href="https://x.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-blue-400 hover:text-blue-600 text-2xl transition duration-300"
+                >
+                  <FaTwitter />
+                </a>
+                <a
+                  href="https://linkedin.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-blue-700 hover:text-blue-900 text-2xl transition duration-300"
+                >
+                  <FaLinkedinIn />
+                </a>
+              </div>
             </div>
           </motion.div>
         </div>
