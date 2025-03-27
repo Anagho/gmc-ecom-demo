@@ -78,9 +78,7 @@ function App() {
   console.log("user:", user);
 
   useEffect(() => {
-    const handleCheckAuth = async () => {
-      if (isAuthenticated) return;
-
+    (async () => {
       try {
         const response = await axios.get(`${serverUrl}/auth/check-auth`, {
           withCredentials: true,
@@ -92,19 +90,15 @@ function App() {
           dispatch(checkAuth(null));
         }
       } catch (error) {
-        dispatch(checkAuth(null)); // Ensure state resets on error
+        dispatch(checkAuth(null)); // Reset auth state on error
         dispatch(
           setError(
             error.response?.data?.message || "Authentication check failed"
           )
         );
       }
-    };
-
-    setTimeout(handleCheckAuth, 0);
-  }, [dispatch, isAuthenticated]);
-
-  if (isCheckingAuth) return <LoadingSpinner />;
+    })();
+  }, [dispatch]); // Run only once on mount
 
   return (
     <>
