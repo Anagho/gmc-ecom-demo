@@ -140,6 +140,9 @@ function MobileSidebar({ isOpen, setIsOpen, user, cartItems }) {
                 </button>
               )}
             </nav>
+
+            <hr className="border-gray-300 my-4" />
+            {/* Category Links */}
           </motion.div>
         </div>
       )}

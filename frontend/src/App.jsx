@@ -44,17 +44,11 @@ export const RedirectAuthenticatedUser = ({ children, message }) => {
   );
 
   const navigate = useNavigate();
-
   const location = useLocation();
 
-  console.log(location);
-
   useEffect(() => {
-    if (isAuthenticated && user) {
-      if (location.pathname === "/login" || location.pathname === "/register") {
-        navigate("/");
-        toast.success(message);
-      } else if (location.pathname === "/verify-email" && user.isVerified) {
+    if (!isCheckingAuth && isAuthenticated && user) {
+      if (["/login", "/register"].includes(location.pathname) || (location.pathname === "/verify-email" && user.isVerified )) {
         navigate("/");
         toast.success(message);
       }
@@ -85,6 +79,8 @@ function App() {
 
   useEffect(() => {
     const handleCheckAuth = async () => {
+      if (isAuthenticated) return;
+
       try {
         const response = await axios.get(`${serverUrl}/auth/check-auth`, {
           withCredentials: true,
@@ -105,8 +101,8 @@ function App() {
       }
     };
 
-    handleCheckAuth();
-  }, [dispatch]);
+    setTimeout(handleCheckAuth, 0);
+  }, [dispatch, isAuthenticated]);
 
   if (isCheckingAuth) return <LoadingSpinner />;
 
