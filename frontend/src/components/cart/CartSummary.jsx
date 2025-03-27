@@ -35,7 +35,7 @@ const CartSummary = () => {
         <h3>{formatCurrency(userCartSummary.totalAmount)}</h3>
       </div>
 
-      <Button onClick={handleCheckout} type='primary' size='large' color='orange' variant='solid' block>Checkout {formatCurrency(userCartSummary.totalAmount)}</Button>
+      <Button onClick={handleCheckout} type='primary' size='large' color='orange' variant='solid' block>Proceed to Checkout {formatCurrency(userCartSummary.totalAmount)}</Button>
     </div>
   );
 }

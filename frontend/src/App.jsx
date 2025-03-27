@@ -1,5 +1,4 @@
 import {
-  Navigate,
   Route,
   Routes,
   useLocation,
@@ -36,6 +35,7 @@ import { serverUrl } from "./utils/helper";
 import LoadingSpinner from "./components/ui/LoadingSpinner";
 import UserDashboardLayout from "./Layout/UserDashboardLayout";
 import UserDashboardPage from "./pages/userDashboard/UserDashboardPage";
+import MobileBottomTab from "./components/ui/MobileBottomTab";
 
 // Redirect authenticated users to the homepage
 export const RedirectAuthenticatedUser = ({ children, message }) => {
@@ -69,6 +69,10 @@ export const RedirectAuthenticatedUser = ({ children, message }) => {
 
 function App() {
   const dispatch = useDispatch();
+  const location = useLocation();
+
+  // Pages where the bottom mobile nav should be hidden
+  const hideBottomNavOn = ["/admin", "/checkout", "/login", "/register", "/verify-email"];
 
   const { isCheckingAuth, isAuthenticated, user } = useSelector(
     (state) => state.auth
@@ -163,6 +167,7 @@ function App() {
         </Route>
       </Routes>
       <Toaster />
+      {!hideBottomNavOn.includes(location.pathname) && <MobileBottomTab />}
     </>
   );
 }

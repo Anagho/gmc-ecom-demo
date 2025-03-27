@@ -19,7 +19,13 @@ import axios from "axios";
 import { serverUrl } from "../../utils/helper";
 import toast from "react-hot-toast";
 import { useState } from "react";
-import { MenuIcon, ShoppingBagIcon, User2Icon, UserCheck2Icon, UserRoundCheck } from "lucide-react";
+import {
+  MenuIcon,
+  ShoppingBagIcon,
+  User2Icon,
+  UserCheck2Icon,
+  UserRoundCheck,
+} from "lucide-react";
 import MobileSidebar from "./MobileSidebar";
 import Logo from "./Logo";
 
@@ -187,9 +193,24 @@ function Navbar() {
             {/* right */}
             <div className="flex items-center gap-4">
               {/* User */}
-              {user && <Space>
-                <Avatar className="bg-green-200 text-emerald-900 font-semibold text-sm">{user.name[0]}</Avatar></Space>}
-              <Space>{user ? <UserCheck2Icon /> : <User2Icon />}</Space>
+              {user && (
+                <NavLink>
+                  <Space>
+                    <Avatar className="bg-green-200 text-emerald-900 font-semibold text-sm">
+                      {user.name[0]}
+                    </Avatar>
+                  </Space>
+                  <Space>
+                    <UserCheck2Icon />
+                  </Space>
+                </NavLink>
+              )}
+
+              {!user && (
+                <Space>
+                  <User2Icon />
+                </Space>
+              )}
 
               {/* Cart */}
               <NavLink
