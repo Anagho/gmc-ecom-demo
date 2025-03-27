@@ -77,6 +77,7 @@ function App() {
   console.log("isAuthenticated:", isAuthenticated);
   console.log("user:", user);
 
+  // Performs an authentication check for users
   useEffect(() => {
     (async () => {
       try {

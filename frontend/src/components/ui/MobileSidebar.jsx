@@ -1,6 +1,6 @@
 import { NavLink, useNavigate } from "react-router";
 import { AnimatePresence, motion } from "framer-motion";
-import { X } from "lucide-react";
+import { ArrowRight, X, Grid, Clock, LayoutGrid, Search } from "lucide-react";
 import {
   ShoppingCartOutlined,
   HeartOutlined,
@@ -14,10 +14,32 @@ import { logoutUser } from "../../features/auth/authSlice";
 import { serverUrl } from "../../utils/helper";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { useState } from "react";
+
+const categories = [
+  { name: "Vegetables", subcategories: ["Tomatoes", "Carrots", "Spinach"] },
+  { name: "Fruits", subcategories: ["Oranges", "Apples", "Bananas"] },
+  { name: "Grains & Cereals", subcategories: ["Rice", "Maize", "Wheat"] },
+  { name: "Dairy Products", subcategories: ["Milk", "Cheese", "Yogurt"] },
+  { name: "Meat & Poultry", subcategories: ["Chicken", "Beef", "Fish"] },
+  { name: "Herbs & Spices", subcategories: ["Ginger", "Garlic", "Turmeric"] },
+];
 
 function MobileSidebar({ isOpen, setIsOpen, user, cartItems }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  const [expandedCategory, setExpandedCategory] = useState(null);
+  const [activeTab, setActiveTab] = useState("CATEGORY")
+    const [featuredProducts, setFeaturedProducts] = useState([
+      "Organic Honey",
+      "Fresh Avocados",
+      "Premium Rice",
+    ]);
+
+  const toggleCategory = (category) => {
+    setExpandedCategory(expandedCategory === category ? null : category);
+  };
 
   // function to close sidebar if the user clicks outside the sidebar
   const handleOutsideClick = (e) => {
@@ -142,7 +164,118 @@ function MobileSidebar({ isOpen, setIsOpen, user, cartItems }) {
             </nav>
 
             <hr className="border-gray-300 my-4" />
-            {/* Category Links */}
+            {/* Shop by Categories*/}
+            <div>
+              <p className="text-gray-600 flex items-center justify-between font-light mb-2">
+                <span>Shop by Categories</span>
+                <ArrowRight />
+              </p>
+
+              {/* Tab Bar */}
+              <div className="flex justify-between bg-gray-100">
+                <button
+                  className={`flex-1 flex items-center justify-center p-2 ${
+                    activeTab === "CATEGORY"
+                      ? "bg-emerald-600 text-white"
+                      : "bg-gray-200 text-gray-800"
+                  } rounded-tl-lg rounded-bl-lg  transition-all duration-500 ease-in-out`}
+                  onClick={() => setActiveTab("CATEGORY")}
+                >
+                  <LayoutGrid size={18} className="mr-2" /> CATEGORY
+                </button>
+                <button
+                  className={`flex-1 flex items-center justify-center p-2 ${
+                    activeTab === "SEARCH"
+                      ? "bg-emerald-600 text-white"
+                      : "bg-gray-200 text-gray-800"
+                  } rounded-tr-lg rounded-br-lg  transition-all duration-500 ease-in-out`}
+                  onClick={() => setActiveTab("SEARCH")}
+                >
+                  <Search size={18} className="mr-2" /> SEARCH
+                </button>
+              </div>
+
+              <motion.div
+                key={activeTab}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 10 }}
+                transition={{ duration: 0.3 }}
+              >
+                {activeTab === "CATEGORY" && (
+                  <ul className="flex flex-col gap-2 my-3">
+                    {categories.map((category) => {
+                      return (
+                        <li key={category.name}>
+                          <button
+                            className="w-full flex justify-between items-center py-1 px-3 bg-gray-100 rounded-lg hover:bg-gray-200"
+                            onClick={() => toggleCategory(category.name)}
+                          >
+                            <span>{category.name}</span>
+                            {expandedCategory === category.name ? (
+                              <span>-</span>
+                            ) : (
+                              <span>+</span>
+                            )}
+                          </button>
+
+                          <AnimatePresence>
+                            {expandedCategory === category.name && (
+                              <motion.ul
+                                initial={{ opacity: 0, height: 0 }}
+                                animate={{ opacity: 1, height: "auto" }}
+                                exit={{ opacity: 0, height: 0 }}
+                                transition={{ duration: 0.3 }}
+                                className="pl-4 mt-1 space-y-1"
+                              >
+                                {category.subcategories.map((sub) => (
+                                  <li
+                                    key={sub}
+                                    className="text-gray-700 hover:text-green-500"
+                                  >
+                                    <NavLink
+                                      to={`/category/${sub.toLowerCase()}`}
+                                      onClick={() => setIsOpen(false)}
+                                    >
+                                      {sub}
+                                    </NavLink>
+                                  </li>
+                                ))}
+                              </motion.ul>
+                            )}
+                          </AnimatePresence>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                )}
+
+                {activeTab === "SEARCH" && (
+                  <div className="my-2">
+                    <input
+                      type="text"
+                      placeholder="Search products..."
+                      className="w-full p-2 border rounded-lg"
+                    />
+                    <div className="mt-4">
+                      <h3 className="font-bold text-gray-800">
+                        Featured Products
+                      </h3>
+                      <ul className="mt-2">
+                        {featuredProducts.map((product, index) => (
+                          <li
+                            key={index}
+                            className="text-gray-700 hover:text-green-500"
+                          >
+                            {product}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+                )}
+              </motion.div>
+            </div>
           </motion.div>
         </div>
       )}
