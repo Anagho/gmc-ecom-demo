@@ -72,30 +72,35 @@ const HeroSlider = () => {
             id: 1,
             image: "/images/slider-home-01.jpg",
             title: "Fresh Fruits & Vegetables",
+            preText: "Shop",
+            postText: "Now",
           },
           {
             id: 2,
             image: "/images/slider-home-02.jpg",
             title: "Fresh Meats & Sea Foods",
+            preText: "Shop",
+            postText: "Now",
           },
           {
             id: 3,
             image: "/images/slider-home-03.jpg",
             title: "Fresh Vegetables & Food Sales 30% Off",
+            preText: "Shop",
+            postText: "Now",
           },
         ].map((slide) => (
           <SwiperSlide key={slide.id}>
             <div
-              className="relative w-full h-[50vh] sm:h-[60vh] md:h-[70vh] bg-cover bg-center z-0"
+              className="relative w-full h-[40vh] sm:h-[60vh] md:h-[70vh] bg-cover bg-center z-0"
               style={{ backgroundImage: `url('${slide.image}')` }}
             >
               <div className="absolute inset-0 bg-black bg-opacity-60"></div>
               <div className="flex flex-col items-center justify-center h-full text-center p-4 sm:p-6 md:p-8 lg:p-12 ">
                 <h1 className="text-white/80 font-semibold leading-6 md:leading-10 text-xl sm:text-2xl md:text-3xl lg:text-5xl  mb-4 text-shadow z-10">
-                  Shop {" "}
-                  <span className="text-green-400 px-1">{slide.title}</span>
-                  {" "}
-                  Today
+                  {slide.preText}{" "}
+                  <span className="text-green-400 px-1">{slide.title}</span>{" "}
+                  {slide.postText}
                 </h1>
                 <p className="text-white/90 text-base md:text-lg lg:text-xl font-light leading-6 md:leading-10 mb-6 text-shadow z-10">
                   Taste the quality of organic produce delivered straight from
