@@ -21,13 +21,14 @@ body {
 .swiper-pagination-bullet {
   background-color:  #15803d !important; /* Green-500 */
   opacity: 0.6 !important;
-  width: 10px !important;
-  height: 10px !important;
+  /* width: 10px !important;
+  height: 10px !important; */
 }
 
 .swiper-pagination-bullet-active {
   background-color: #22c55e !important; /* Green-700 */
   opacity: 1 !important;
-    width: 10px !important;
-  height: 10px !important;
+    /* width: 10px !important;
+  height: 10px !important; */
 }
+

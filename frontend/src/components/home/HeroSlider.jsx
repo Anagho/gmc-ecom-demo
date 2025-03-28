@@ -92,7 +92,7 @@ const HeroSlider = () => {
         ].map((slide) => (
           <SwiperSlide key={slide.id}>
             <div
-              className="relative w-full h-[30vh] sm:h-[40vh] md:h-[50vh] lg:h-[60vh] bg-no-repeat bg-cover bg-center z-0"
+              className="relative w-full h-[35vh] sm:h-[40vh] md:h-[50vh] lg:h-[60vh] bg-no-repeat bg-cover bg-center z-0"
               style={{ backgroundImage: `url('${slide.image}')` }}
             >
               <div className="absolute inset-0 bg-black bg-opacity-60"></div>
@@ -106,7 +106,10 @@ const HeroSlider = () => {
                   Taste the quality of organic produce delivered straight from
                   the farm to your doorstep.
                 </p>
-                <Link to="/products" className="z-10">
+                <Link
+                  to="/products"
+                  className="z-10"
+                >
                   <CTAButton buttonText="Shop Now" />
                 </Link>
               </div>
