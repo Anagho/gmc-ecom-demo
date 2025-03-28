@@ -176,7 +176,7 @@ function Navbar() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   return (
-    <nav className="shadow-md bg-white sticky top-0 z-[999]">
+    <nav className="shadow bg-white sticky top-0 z-[999]">
       <section className="container mx-auto p-4">
         {/* Mobile Navbar - Only show in small screens */}
         <div className="lg:hidden w-full">
