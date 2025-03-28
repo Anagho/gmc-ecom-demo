@@ -17,8 +17,8 @@ function Hero() {
 
         {/* Right Section: Two Stacked Grid Containers (Hidden on Small Screens) */}
         <div className="hidden md:grid grid-rows-2 gap-4">
-          <div className="bg-gray-100 p-4 rounded-sm">Grid Box 1</div>
-          <div className="bg-gray-200 p-4 rounded-sm">Grid Box 2</div>
+          <div className="bg-gray-100 p-4 rounded-sm shadow">Grid Box 1</div>
+          <div className="bg-gray-200 p-4 rounded-sm shadow">Grid Box 2</div>
         </div>
       </div>
     </section>
