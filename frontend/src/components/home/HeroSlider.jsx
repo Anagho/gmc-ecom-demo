@@ -92,7 +92,7 @@ const HeroSlider = () => {
         ].map((slide) => (
           <SwiperSlide key={slide.id}>
             <div
-              className="relative w-full h-[35vh] sm:h-[40vh] md:h-[60vh] bg-no-repeat bg-cover bg-center z-0"
+              className="relative w-full h-[40vh] sm:h-[60vh] md:h-[70vh] bg-no-repeat bg-cover bg-center z-0"
               style={{ backgroundImage: `url('${slide.image}')` }}
             >
               <div className="absolute inset-0 bg-black bg-opacity-60"></div>
