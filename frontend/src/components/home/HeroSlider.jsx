@@ -92,17 +92,17 @@ const HeroSlider = () => {
         ].map((slide) => (
           <SwiperSlide key={slide.id}>
             <div
-              className="relative w-full h-[35vh] sm:h-[60vh] md:h-[70vh] bg-no-repeat bg-cover bg-center z-0"
+              className="relative w-full h-[30vh] sm:h-[40vh] md:h-[50vh] lg:h-[60vh] bg-no-repeat bg-cover bg-center z-0"
               style={{ backgroundImage: `url('${slide.image}')` }}
             >
               <div className="absolute inset-0 bg-black bg-opacity-60"></div>
               <div className="flex flex-col items-center justify-center h-full text-center p-4 sm:p-6 md:p-8 lg:p-12 ">
-                <h1 className="text-white/80 font-semibold leading-6 md:leading-10 text-xl sm:text-2xl md:text-3xl lg:text-5xl  mb-4 text-shadow z-10">
+                <h1 className="text-white/80 font-semibold leading-6 md:leading-10 text-xl sm:text-2xl md:text-3xl lg:text-4xl  mb-4 text-shadow z-10">
                   {slide.preText}{" "}
                   <span className="text-green-400 px-1">{slide.title}</span>{" "}
                   {slide.postText}
                 </h1>
-                <p className="text-white/90 text-base md:text-lg lg:text-xl font-light leading-6 md:leading-10 mb-6 text-shadow z-10">
+                <p className="text-white/90 text-base md:text-lg lg:text-xl font-light leading-6 sm:leading-7 md:leading-10 mb-6 text-shadow z-10">
                   Taste the quality of organic produce delivered straight from
                   the farm to your doorstep.
                 </p>
