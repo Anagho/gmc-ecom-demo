@@ -78,7 +78,7 @@ const HeroSlider = () => {
           {
             id: 2,
             image: "/images/slider-home-02.jpg",
-            title: "Fresh Meats & Sea Foods",
+            title: "Fresh Eggs & Fishes",
             preText: "Shop",
             postText: "Now",
           },

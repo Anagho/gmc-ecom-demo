@@ -7,7 +7,8 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { Spin } from "antd";
 
-import Cart from "./pages/Cart";
+import CartPage from "./pages/CartPage";
+import WishListPage from "./pages/WishListPage";
 import MarketPlace from "./pages/MarketPlace";
 import ProductDetails from "./pages/ProductDetails";
 import MainLayout from "./Layout/MainLayout";
@@ -36,6 +37,7 @@ import LoadingSpinner from "./components/ui/LoadingSpinner";
 import UserDashboardLayout from "./Layout/UserDashboardLayout";
 import UserDashboardPage from "./pages/userDashboard/UserDashboardPage";
 import MobileBottomTab from "./components/ui/MobileBottomTab";
+
 
 // Redirect authenticated users to the homepage
 export const RedirectAuthenticatedUser = ({ children, message }) => {
@@ -117,7 +119,8 @@ function App() {
           </Route>
 
           <Route path="checkout" element={<Checkout />} />
-          <Route path="cart" element={<Cart />} />
+          <Route path="cart" element={<CartPage />} />
+          <Route path="wishlist" element={<WishListPage />} />
 
           {/* Public Routes */}
           <Route
