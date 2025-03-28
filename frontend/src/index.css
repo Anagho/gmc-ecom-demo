@@ -4,6 +4,11 @@
 
 body {
     font-family: 'Public Sans', serif;
+   /* background: linear-gradient(to bottom right, rgba(33, 100, 78, 0.8), rgba(47, 187, 143, 0.9));
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px); /* For Safari */
+    /* height: 100vh;
+    margin: 0; */ 
 }
 
 /* Hide scrollbar for Mobile*/
