@@ -8,7 +8,7 @@ function HomePage() {
     <section>
       {/* Only show in small screens */}
       <motion.div
-        className="bg-gradient-to-r from-green-600 to-emerald-700 text-white text-center p-1 md:hidden"
+        className="bg-gradient-to-r from-green-600 to-emerald-600 text-white text-center p-1 md:hidden"
         initial={{ opacity: 1 }}
         animate={{
           // opacity: [0.6, 0.8, 0.9, 0.85, 1], // Flickering effect
