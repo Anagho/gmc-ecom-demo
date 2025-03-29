@@ -22,12 +22,13 @@ import { useState } from "react";
 import {
   Heart,
   MenuIcon,
+  SearchIcon,
   ShoppingCart,
   Store,
   User2Icon,
   UserCheck2Icon,
 } from "lucide-react";
-import MobileSidebar from "./MobileSidebar";
+import MobileSidebar from "../mobile/MobileSidebar";
 import Logo from "./Logo";
 
 function Navbar() {
@@ -193,7 +194,12 @@ function Navbar() {
             </div>
 
             {/* right */}
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-6">
+              {/* Search Icon */}
+              <button>
+                  <SearchIcon size={22} />
+              </button>
+
               {/* User */}
               {user && (
                 <NavLink to="/profile" className="flex items-center gap-4">
@@ -201,9 +207,6 @@ function Navbar() {
                     <Avatar className="bg-green-200 text-emerald-900 font-semibold text-sm">
                       {user.name[0]}
                     </Avatar>
-                  </Space>
-                  <Space>
-                    <UserCheck2Icon />
                   </Space>
                 </NavLink>
               )}
@@ -232,7 +235,7 @@ function Navbar() {
           </div>
 
           {/* Search Bar */}
-          <div className="w-full mt-4">
+          <div className="hidden w-full mt-4">
             {/* Search Input */}
             <div className="flex items-center border border-gray-600 rounded-full px-2 py-1">
               <SearchOutlined className="text-lg text-gray-500 mr-2 rounded-full" />
@@ -255,12 +258,12 @@ function Navbar() {
             {/* Search Bar */}
             <div className="flex items-center justify-center gap-4 flex-grow mx-8">
               {/* Search Input */}
-              <div className="flex items-center border border-gray-400 rounded-lg px-2 py-1 w-full max-w-[500px]">
+              <div className="flex items-center border border-gray-400 rounded-lg px-2 w-full max-w-[500px]">
                 <SearchOutlined className="text-lg text-gray-500 mr-2 rounded-full" />
                 <input
                   type="text"
                   placeholder="Search products, farms, categories..."
-                  className="outline-none border-none py-1 text-sm flex-grow w-full"
+                  className="outline-none border-none py-2 text-base text-gray-700 flex-grow w-full"
                 />
               </div>
               <button className="px-4 py-2 bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-lg shadow-sm">

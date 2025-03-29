@@ -1,12 +1,6 @@
 import { NavLink, useNavigate } from "react-router";
 import { AnimatePresence, motion } from "framer-motion";
-import {
-  ArrowRight,
-  X,
-  LayoutGrid,
-  Search,
-  ArrowDown,
-} from "lucide-react";
+import { ArrowRight, X, LayoutGrid, Search, ArrowDown } from "lucide-react";
 import {
   ShoppingCartOutlined,
   HeartOutlined,
@@ -16,14 +10,20 @@ import {
   FacebookFilled,
   FacebookOutlined,
 } from "@ant-design/icons";
-import Logo from "./Logo";
+import Logo from "../ui/Logo";
 import { useDispatch } from "react-redux";
 import { logoutUser } from "../../features/auth/authSlice";
 import { serverUrl } from "../../utils/helper";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { useState } from "react";
-import { FaFacebookF, FaInstagram, FaLinkedinIn, FaTwitter, FaYoutube } from "react-icons/fa";
+import {
+  FaFacebookF,
+  FaInstagram,
+  FaLinkedinIn,
+  FaTwitter,
+  FaYoutube,
+} from "react-icons/fa";
 
 const categories = [
   { name: "Vegetables", subcategories: ["Tomatoes", "Carrots", "Onions"] },
@@ -39,12 +39,12 @@ function MobileSidebar({ isOpen, setIsOpen, user, cartItems }) {
   const dispatch = useDispatch();
 
   const [expandedCategory, setExpandedCategory] = useState(null);
-  const [activeTab, setActiveTab] = useState("CATEGORY")
-    const [featuredProducts, setFeaturedProducts] = useState([
-      "Organic Honey",
-      "Fresh Avocados",
-      "Premium Rice",
-    ]);
+  const [activeTab, setActiveTab] = useState("CATEGORY");
+  const [featuredProducts, setFeaturedProducts] = useState([
+    "Organic Honey",
+    "Fresh Avocados",
+    "Premium Rice",
+  ]);
 
   const toggleCategory = (category) => {
     setExpandedCategory(expandedCategory === category ? null : category);

@@ -36,7 +36,7 @@ import { serverUrl } from "./utils/helper";
 import LoadingSpinner from "./components/ui/LoadingSpinner";
 import UserDashboardLayout from "./Layout/UserDashboardLayout";
 import UserDashboardPage from "./pages/userDashboard/UserDashboardPage";
-import MobileBottomTab from "./components/ui/MobileBottomTab";
+import MobileBottomTab from "./components/mobile/MobileBottomTab";
 
 
 // Redirect authenticated users to the homepage
