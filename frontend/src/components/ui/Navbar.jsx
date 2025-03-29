@@ -178,7 +178,7 @@ function Navbar() {
 
   return (
     <nav className="shadow bg-white sticky top-0 z-[999]">
-      <section className="container mx-auto p-4">
+      <section className="lg:mx-4 xl-container xl:mx-auto p-4">
         {/* Mobile Navbar - Only show in small screens */}
         <div className="lg:hidden w-full">
           <div className="flex items-center justify-between">
@@ -256,7 +256,7 @@ function Navbar() {
             <Logo />
 
             {/* Search Bar */}
-            <div className="flex items-center justify-center gap-4 flex-grow mx-8">
+            <div className="hidden lg:flex items-center justify-center gap-4 flex-grow mx-8">
               {/* Search Input */}
               <div className="flex items-center border border-gray-400 rounded-lg px-2 w-full max-w-[500px]">
                 <SearchOutlined className="text-lg text-gray-500 mr-2 rounded-full" />

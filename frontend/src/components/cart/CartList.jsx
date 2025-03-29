@@ -3,15 +3,15 @@ import CartItemCard from "./CartItemCard";
 
 import { useSelector } from "react-redux";
 import { Link } from "react-router";
-import { ShoppingCart } from "lucide-react";
+import { ShoppingBasket } from "lucide-react";
 
 const CartList = () => {
   const { cartItems } = useSelector((state) => state.cart);
 
   if (cartItems.length === 0) {
     return (
-      <div className="flex flex-col items-center text-center">
-        <ShoppingCart size={100} className="text-gray-400 mb-4" />
+      <div className="flex flex-col items-center justify-center">
+        <ShoppingBasket size={100} className="text-gray-400 mb-4" />
         <h2 className="text-3xl text-gray-400 font-semibold mb-10">
           Your Cart is Empty
         </h2>

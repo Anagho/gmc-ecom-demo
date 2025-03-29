@@ -13,7 +13,7 @@ const MobileBottomTab = () => {
   console.log("wishlistItems:", wishlistItems);
 
   return (
-    <div className="fixed bottom-0 left-0 w-full bg-white border-t border-gray-50 shadow-md z-[800] md:hidden">
+    <div className="fixed bottom-0 left-0 w-full bg-white border-t border-gray-50 shadow-md z-[800] lg:hidden">
       <div className="flex justify-around py-2">
         <TabItem icon={<Home size={24} />} label="Home" path="/" />
         <TabItem icon={<Store size={24} />} label="Store" path="/products" />
