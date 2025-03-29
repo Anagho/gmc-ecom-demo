@@ -7,8 +7,6 @@ import {
   UserOutlined,
   ShopOutlined,
   LogoutOutlined,
-  FacebookFilled,
-  FacebookOutlined,
 } from "@ant-design/icons";
 import Logo from "../ui/Logo";
 import { useDispatch } from "react-redux";
@@ -75,7 +73,7 @@ function MobileSidebar({ isOpen, setIsOpen, user, cartItems }) {
       {isOpen && (
         <div
           id="sidebar-wrapper"
-          className="fixed inset-0 bg-black bg-opacity-10 z-[999]"
+          className="fixed inset-0 bg-black bg-opacity-60 z-[999]"
           onClick={handleOutsideClick}
         >
           <motion.div
