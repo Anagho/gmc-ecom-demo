@@ -108,7 +108,7 @@ const HeroSlider = () => {
                     opacity: activeSlide === slide.id - 1 ? 1 : 0,
                     x: activeSlide === slide.id - 1 ? 0 : -50,
                   }}
-                  transition={{ duration: 2, ease: "easeOut", delay: 0.8 }}
+                  transition={{ duration: 1, ease: "easeOut", delay: 0.8 }}
                   className="text-white/80 font-semibold leading-6 md:leading-10 text-xl sm:text-2xl md:text-3xl lg:text-4xl  mb-4 max-w-[90%] text-shadow z-10"
                 >
                   {slide.preText}{" "}
@@ -122,7 +122,7 @@ const HeroSlider = () => {
                     opacity: activeSlide === slide.id - 1 ? 1 : 0,
                     x: activeSlide === slide.id - 1 ? 0 : 50,
                   }}
-                  transition={{ duration: 2, ease: "easeOut", delay: 0.8 }}
+                  transition={{ duration: 1, ease: "easeOut", delay: 0.8 }}
                   className="text-white/90 text-base md:text-lg lg:text-xl font-light leading-6 sm:leading-7 md:leading-10 mb-6 text-shadow max-w-[90%] sm:max-w-[70%] z-10"
                 >
                   Taste the quality of organic produce delivered straight from
@@ -135,7 +135,7 @@ const HeroSlider = () => {
                     opacity: activeSlide === slide.id - 1 ? 1 : 0,
                     y: activeSlide === slide.id - 1 ? 0 : 50,
                   }}
-                  transition={{ duration: 2, ease: "easeOut", delay: 0.8 }}
+                  transition={{ duration: 1, ease: "easeOut", delay: 0.8 }}
                   className="z-10"
                 >
                   <Link to="/products">
