@@ -1,8 +1,8 @@
 import { Heart, Home, ShoppingCart, Store, User2 } from "lucide-react";
 import { NavLink } from "react-router";
 import { useSelector } from "react-redux";
-
-
+import { useState } from "react";
+import MobileCart from "./MobileCart";
 
 const MobileBottomTab = () => {
   const { cartItems } = useSelector((state) => state.cart);
@@ -11,6 +11,9 @@ const MobileBottomTab = () => {
 
   console.log("cartItems:", cartItems);
   console.log("wishlistItems:", wishlistItems);
+
+  // Mobile Cart State
+  const [cartOpen, setCartOpen] = useState(false);
 
   return (
     <div className="fixed bottom-0 left-0 w-full bg-white border-t border-gray-50 shadow-md z-[800] lg:hidden">
@@ -24,9 +27,10 @@ const MobileBottomTab = () => {
           badge={wishlistItems?.length || 0}
         />
         <TabItem
-          icon={<ShoppingCart size={24} />}
+          icon={
+            <ShoppingCart size={24} onClick={() => setCartOpen(true)} />
+          }
           label="Cart"
-          path="/cart"
           badge={cartItems?.length || 0}
         />
         <TabItem
@@ -35,6 +39,9 @@ const MobileBottomTab = () => {
           path={user ? "/profile" : "/login"}
         />
       </div>
+
+      {/* Mobile Cart */}
+      <MobileCart cartOpen={cartOpen} setCartOpen={setCartOpen} />
     </div>
   );
 };
@@ -50,6 +57,7 @@ const TabItem = ({ icon, label, path, badge }) => {
      flex flex-col items-center transition duration-200 ${
        isActive ? "text-emerald-700" : "text-gray-600 hover:text-green-600"
      }`}
+     onClick={onclick}
     >
       <div className="relative">
         {icon}

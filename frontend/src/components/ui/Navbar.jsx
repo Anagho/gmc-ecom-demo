@@ -3,11 +3,9 @@ import { NavLink, useNavigate } from "react-router";
 import Filter from "./Filter";
 import {
   UserOutlined,
-  ShoppingCartOutlined,
   DownOutlined,
   HeartOutlined,
   ShoppingOutlined,
-  ShopOutlined,
   DashboardOutlined,
   CarryOutOutlined,
   SearchOutlined,
@@ -26,7 +24,6 @@ import {
   ShoppingCart,
   Store,
   User2Icon,
-  UserCheck2Icon,
 } from "lucide-react";
 import MobileSidebar from "../mobile/MobileSidebar";
 import Logo from "./Logo";
@@ -177,7 +174,7 @@ function Navbar() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   return (
-    <nav className="shadow bg-white sticky top-0 z-[999]">
+    <nav className="shadow bg-white sticky top-0 z-[800]">
       <section className="container mx-auto p-4">
         {/* Mobile Navbar - Only show in small screens */}
         <div className="lg:hidden w-full">
