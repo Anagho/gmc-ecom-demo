@@ -3,9 +3,8 @@ import HeroSlider from "./HeroSlider";
 
 function Hero() {
   return (
-    <section className="xl:container xl:mx-auto lg:mt-6 lg:mx-6">
+    <section className="container mx-auto lg:mt-6">
       <div className="grid grid-cols-1 lg:grid-cols-5 gap-4">
-
         <div className="hidden lg:grid bg-gray-100 p-4 rounded-sm">
           Category Box
         </div>

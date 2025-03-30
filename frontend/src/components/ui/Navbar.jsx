@@ -178,7 +178,7 @@ function Navbar() {
 
   return (
     <nav className="shadow bg-white sticky top-0 z-[999]">
-      <section className="lg:mx-4 xl-container xl:mx-auto p-4">
+      <section className="container mx-auto p-4">
         {/* Mobile Navbar - Only show in small screens */}
         <div className="lg:hidden w-full">
           <div className="flex items-center justify-between">

@@ -6,15 +6,17 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { useRef, useState } from "react";
+import { motion } from "framer-motion";
 
 const HeroSlider = () => {
   const prevRef = useRef(null);
   const nextRef = useRef(null);
   const [isHovered, setIsHovered] = useState(false);
+  const [activeSlide, setActiveSlide] = useState(0);
 
   return (
     <div
-      className="relative"
+      className="relative overflow-hidden"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
@@ -42,13 +44,14 @@ const HeroSlider = () => {
       </button>
 
       <Swiper
-        spaceBetween={10}
+        spaceBetween={0}
         slidesPerView={1}
         loop={true}
         autoplay={{
           delay: 8000,
           disableOnInteraction: false,
         }}
+        speed={1500}
         pagination={{
           dynamicBullets: true,
           clickable: true,
@@ -66,6 +69,7 @@ const HeroSlider = () => {
             swiper.navigation.update();
           });
         }}
+        onSlideChange={(swiper) => setActiveSlide(swiper.realIndex)}
       >
         {[
           {
@@ -92,23 +96,52 @@ const HeroSlider = () => {
         ].map((slide) => (
           <SwiperSlide key={slide.id}>
             <div
-              className="relative w-full h-[35vh] sm:h-[40vh] md:h-[45vh] lg:h-[55vh] xl:h-[60vh] rounded-md bg-no-repeat bg-cover bg-center z-0 tablet-slider-height"
+              className="relative w-full h-[35vh] sm:h-[40vh] md:h-[45vh] lg:h-[55vh] xl:h-[60vh] rounded-md bg-no-repeat bg-cover bg-center z-0 tablet-slider-height max-w-[320px]:h-[60vh]"
               style={{ backgroundImage: `url('${slide.image}')` }}
             >
               <div className="absolute inset-0 bg-black bg-opacity-60 rounded-sm"></div>
+
               <div className="flex flex-col md:gap-4 items-center justify-center h-full text-center p-4 sm:p-6 md:p-8 lg:p-12 ">
-                <h1 className="text-white/80 font-semibold leading-6 md:leading-10 text-xl sm:text-2xl md:text-3xl lg:text-4xl  mb-4 max-w-[90%] text-shadow z-10">
+                <motion.h1
+                  initial={{ opacity: 0, x: -50 }}
+                  animate={{
+                    opacity: activeSlide === slide.id - 1 ? 1 : 0,
+                    x: activeSlide === slide.id - 1 ? 0 : -50,
+                  }}
+                  transition={{ duration: 2, ease: "easeOut", delay: 0.8 }}
+                  className="text-white/80 font-semibold leading-6 md:leading-10 text-xl sm:text-2xl md:text-3xl lg:text-4xl  mb-4 max-w-[90%] text-shadow z-10"
+                >
                   {slide.preText}{" "}
                   <span className="text-green-400 px-1">{slide.title}</span>{" "}
                   {slide.postText}
-                </h1>
-                <p className="text-white/90 text-base md:text-lg lg:text-xl font-light leading-6 sm:leading-7 md:leading-10 mb-6 text-shadow max-w-[90%] sm:max-w-[70%] z-10">
+                </motion.h1>
+
+                <motion.p
+                  initial={{ opacity: 0, x: 50 }}
+                  animate={{
+                    opacity: activeSlide === slide.id - 1 ? 1 : 0,
+                    x: activeSlide === slide.id - 1 ? 0 : 50,
+                  }}
+                  transition={{ duration: 2, ease: "easeOut", delay: 0.8 }}
+                  className="text-white/90 text-base md:text-lg lg:text-xl font-light leading-6 sm:leading-7 md:leading-10 mb-6 text-shadow max-w-[90%] sm:max-w-[70%] z-10"
+                >
                   Taste the quality of organic produce delivered straight from
                   the farm to your doorstep.
-                </p>
-                <Link to="/products" className="z-10">
-                  <CTAButton buttonText="Shop Now" />
-                </Link>
+                </motion.p>
+
+                <motion.div
+                  initial={{ opacity: 0, y: 50 }}
+                  animate={{
+                    opacity: activeSlide === slide.id - 1 ? 1 : 0,
+                    y: activeSlide === slide.id - 1 ? 0 : 50,
+                  }}
+                  transition={{ duration: 2, ease: "easeOut", delay: 0.8 }}
+                  className="z-10"
+                >
+                  <Link to="/products">
+                    <CTAButton buttonText="Shop Now" />
+                  </Link>
+                </motion.div>
               </div>
             </div>
           </SwiperSlide>
